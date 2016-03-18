@@ -14,6 +14,7 @@ public class Pin {
 
     /**
      * Output pin masks
+     * O joão é panaca
      */
     public static final int
             K_OE = 0x01, //   |****||***+|

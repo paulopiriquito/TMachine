@@ -23,4 +23,6 @@ public class Pin {
             SDX = 0x08,   //  |****||+***|
             IOSsel = 0x10 //  |***+||****|
     ;
+
+    //E também é blup
 }

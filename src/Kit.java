@@ -1,12 +1,10 @@
 import isel.leic.usbio.UsbPort;
 import isel.leic.utils.Time;
-
 /**
  * Virtualiza o acesso ao UsbPort
  */
 public class Kit {
     private static int currentOutValue;
-
 
     /**
      * Inicia a classe

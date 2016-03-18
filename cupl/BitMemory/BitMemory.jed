@@ -1,7 +1,7 @@
 
 CUPL(WM)        5.0a  Serial# 60008009
 Device          v750c  Library DLIB-h-40-2
-Created         Wed Mar 16 22:11:25 2016
+Created         Fri Mar 18 05:09:00 2016
 Name            BitMemory 
 Partno          02 
 Revision        01 
@@ -248,4 +248,4 @@ Location
 *L14368 01001001001001001001001001000000
 *L14432 00000110000001100100010000000000
 *C25CF
-*6704
+*6708

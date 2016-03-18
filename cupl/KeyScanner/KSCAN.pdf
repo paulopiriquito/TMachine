@@ -1,11 +1,11 @@
-{COMPONENT C:\USERS\A3908\DROPBOX\ENGENHARIA\ISEL\LIC\TRABALHOS\HARDWARE\KSCAN.SYM
+{COMPONENT C:\USERS\A3908\DROPBOX\ENGENHARIA\ISEL\LIC\TRABALHOS\TMACHINE\CUPL\KEYSCANNER\KSCAN.SYM
 
  {ENVIRONMENT
   {PDIFvrev 3.00}
   {Program "CUPL(WM) Version 5.0a"}
   {DBtype "Schematic"}
   {DBvrev 1.01}
-  {DBtime "Wed Mar 16 20:18:17 2016 "}
+  {DBtime "Fri Mar 18 05:08:46 2016 "}
   {DBunit "MIL"}
   {DBgrid 10}
   {Lyrstr "WIRES" 1 "BUS" 1 "GATE" 2 "IEEE" 2 "PINFUN" 3 "PINNUM" 1 
@@ -35,15 +35,15 @@
    [Ly "PINCON"]
    {P CLK {Pt "INPUT"}{Lq 0}{Ploc 100 160}}
    {P K_ACK {Pt "INPUT"}{Lq 0}{Ploc 100 120}}
-   {P M0 {Pt "INPUT"}{Lq 0}{Ploc 100 100}}
-   {P M1 {Pt "INPUT"}{Lq 0}{Ploc 100 80}}
-   {P M2 {Pt "INPUT"}{Lq 0}{Ploc 100 60}}
-   {P M3 {Pt "INPUT"}{Lq 0}{Ploc 100 40}}
-   {P OE {Pt "INPUT"}{Lq 0}{Ploc 100 20}}
-   {P D0 {Pt "I/O"}{Lq 0}{Ploc 300 20}}
-   {P D1 {Pt "I/O"}{Lq 0}{Ploc 300 40}}
-   {P D2 {Pt "I/O"}{Lq 0}{Ploc 300 60}}
-   {P D3 {Pt "I/O"}{Lq 0}{Ploc 300 80}}
+   {P OE {Pt "INPUT"}{Lq 0}{Ploc 100 100}}
+   {P LN0 {Pt "INPUT"}{Lq 0}{Ploc 100 80}}
+   {P LN1 {Pt "INPUT"}{Lq 0}{Ploc 100 60}}
+   {P LN2 {Pt "INPUT"}{Lq 0}{Ploc 100 40}}
+   {P LN3 {Pt "INPUT"}{Lq 0}{Ploc 100 20}}
+   {P COL0 {Pt "I/O"}{Lq 0}{Ploc 300 20}}
+   {P COL1 {Pt "I/O"}{Lq 0}{Ploc 300 40}}
+   {P COL2 {Pt "I/O"}{Lq 0}{Ploc 300 60}}
+   {P COL3 {Pt "I/O"}{Lq 0}{Ploc 300 80}}
    {P K_VAL {Pt "I/O"}{Lq 0}{Ploc 300 100}}
    {P K0 {Pt "OUTPUT"}{Lq 0}{Ploc 300 120}}
    {P K1 {Pt "OUTPUT"}{Lq 0}{Ploc 300 140}}
@@ -105,16 +105,16 @@
    [Tj "LC"]
    {T "CLK" 140 160}
    {T "K_ACK" 140 120}
-   {T "M0" 140 100}
-   {T "M1" 140 80}
-   {T "M2" 140 60}
-   {T "M3" 140 40}
-   {T "OE" 140 20}
+   {T "OE" 140 100}
+   {T "LN0" 140 80}
+   {T "LN1" 140 60}
+   {T "LN2" 140 40}
+   {T "LN3" 140 20}
    [Tj "RC"]
-   {T "D0" 260 20}
-   {T "D1" 260 40}
-   {T "D2" 260 60}
-   {T "D3" 260 80}
+   {T "COL0" 260 20}
+   {T "COL1" 260 40}
+   {T "COL2" 260 60}
+   {T "COL3" 260 80}
    {T "K_VAL" 260 100}
    {T "K0" 260 120}
    {T "K1" 260 140}
@@ -133,7 +133,7 @@
    {EX
     [Ly "ATTR2"]
     [Ts 12][Tj "CT"][Tr 0][Tm "N"]
-    {At PLD C:\USERS\A3908\DROPBOX\ENGENHARIA\ISEL\LIC\TRABALHOS\HARDWARE\KSCAN 200 200}
+    {At PLD C:\USERS\A3908\DROPBOX\ENGENHARIA\ISEL\LIC\TRABALHOS\TMACHINE\CUPL\KEYSCANNER\KSCAN 200 200}
    }
   }
  }
@@ -147,23 +147,23 @@
    }
    {N K_ACK
    }
-   {N M0
-   }
-   {N M1
-   }
-   {N M2
-   }
-   {N M3
-   }
    {N OE
    }
-   {N D0
+   {N LN0
    }
-   {N D1
+   {N LN1
    }
-   {N D2
+   {N LN2
    }
-   {N D3
+   {N LN3
+   }
+   {N COL0
+   }
+   {N COL1
+   }
+   {N COL2
+   }
+   {N COL3
    }
    {N K_VAL
    }

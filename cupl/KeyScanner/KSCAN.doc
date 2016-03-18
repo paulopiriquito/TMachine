@@ -5,7 +5,7 @@
 
 CUPL(WM)        5.0a Serial# 60008009
 Device          v750c  Library DLIB-h-40-2
-Created         Wed Mar 16 20:18:17 2016
+Created         Fri Mar 18 05:08:46 2016
 Name            Key Decode 
 Partno          02 
 Revision        01 
@@ -21,10 +21,10 @@ Location
 
 C0.d  =>
     C0 & !C1 & !K_ack
-  # !C0 & !C1 & !K0 & !K1 & !M0
-  # !C0 & !C1 & K0 & !K1 & !M1
-  # !C0 & !C1 & !K0 & K1 & !M2
-  # !C0 & !C1 & K0 & K1 & !M3
+  # !C0 & !C1 & !K0 & !K1 & !LN0
+  # !C0 & !C1 & K0 & !K1 & !LN1
+  # !C0 & !C1 & !K0 & K1 & !LN2
+  # !C0 & !C1 & K0 & K1 & !LN3
 
 C0.ar  =>
     0 
@@ -37,10 +37,10 @@ C0.sp  =>
 
 C1.d  =>
     C0 & !C1 & K_ack
-  # !C0 & C1 & !K0 & !K1 & !M0
-  # !C0 & C1 & K0 & !K1 & !M1
-  # !C0 & C1 & !K0 & K1 & !M2
-  # !C0 & C1 & K0 & K1 & !M3
+  # !C0 & C1 & !K0 & !K1 & !LN0
+  # !C0 & C1 & K0 & !K1 & !LN1
+  # !C0 & C1 & !K0 & K1 & !LN2
+  # !C0 & C1 & K0 & K1 & !LN3
 
 C1.ar  =>
     0 
@@ -54,16 +54,16 @@ C1.sp  =>
 CE =>
     !C0 & !C1
 
-!D0 =>
+!COL0 =>
     !K2 & !K3
 
-!D1 =>
+!COL1 =>
     K2 & !K3
 
-!D2 =>
+!COL2 =>
     !K2 & K3
 
-!D3 =>
+!COL3 =>
     K2 & K3
 
 K0.t  =>
@@ -127,15 +127,15 @@ K3.sp  =>
     0 
 
 K_press =>
-    !K0 & K1 & !M2
-  # !K0 & !M0 & !M2
-  # !K0 & !K1 & !M0
-  # K0 & !K1 & !M1
-  # !K1 & !M0 & !M1
-  # K1 & !M2 & !M3
-  # !M0 & !M1 & !M2 & !M3
-  # K0 & !M1 & !M3
-  # K0 & K1 & !M3
+    !K0 & K1 & !LN2
+  # !K0 & !LN0 & !LN2
+  # !K0 & !K1 & !LN0
+  # K0 & !K1 & !LN1
+  # !K1 & !LN0 & !LN1
+  # K1 & !LN2 & !LN3
+  # !LN0 & !LN1 & !LN2 & !LN3
+  # K0 & !LN1 & !LN3
+  # K0 & K1 & !LN3
 
 K_scan =>
     !C0 & !C1
@@ -143,16 +143,16 @@ K_scan =>
 K_val =>
     C0 & !C1
 
-D0.oe  =>
+COL0.oe  =>
     1 
 
-D1.oe  =>
+COL1.oe  =>
     1 
 
-D2.oe  =>
+COL2.oe  =>
     1 
 
-D3.oe  =>
+COL3.oe  =>
     1 
 
 K_val.oe  =>
@@ -179,10 +179,10 @@ Pol   Name              Ext     Pin     Type     Used   Pterms  Level
     C1                  sp      33       M        1       1       1     
     CE                          0        I        1       -       -     
     CLK                         1        V        -       -       -     
-    D0                          18       V        1       16      2     
-    D1                          19       V        1       16      2     
-    D2                          20       V        1       14      2     
-    D3                          21       V        1       12      2     
+    COL0                        18       V        1       16      2     
+    COL1                        19       V        1       16      2     
+    COL2                        20       V        1       14      2     
+    COL3                        21       V        1       12      2     
     K0                          14       V        -       -       -     
     K0                  t       14       X        1       8       2     
     K0                  ar      14       X        1       1       1     
@@ -211,15 +211,15 @@ Pol   Name              Ext     Pin     Type     Used   Pterms  Level
     K_press                     0        I        9       -       -     
     K_scan                      0        I        1       -       -     
     K_val                       22       V        1       10      2     
-    M0                          3        V        -       -       -     
-    M1                          4        V        -       -       -     
-    M2                          5        V        -       -       -     
-    M3                          6        V        -       -       -     
-    OE                          7        V        -       -       -     
-    D0                  oe      18       D        1       1       0     
-    D1                  oe      19       D        1       1       0     
-    D2                  oe      20       D        1       1       0     
-    D3                  oe      21       D        1       1       0     
+    LN0                         4        V        -       -       -     
+    LN1                         5        V        -       -       -     
+    LN2                         6        V        -       -       -     
+    LN3                         7        V        -       -       -     
+    OE                          3        V        -       -       -     
+    COL0                oe      18       D        1       1       0     
+    COL1                oe      19       D        1       1       0     
+    COL2                oe      20       D        1       1       0     
+    COL3                oe      21       D        1       1       0     
     K_val               oe      22       D        1       1       0     
 
 
@@ -257,10 +257,10 @@ Pin #22 Node 33 ,43  14367 Mode  ---  14399 xxxx
  01344 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
  01428 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
  01512 ------------------------------------------------------------x--------x-----x-------- 
- 01596 -------x-------x---------------------------------------------x----x-x--------------- 
- 01680 ------x--------x------------------------------------------x--x------x--------------- 
- 01764 -------x------x-----------------------------------x----------x------x--------------- 
- 01848 ------x-------x---------------------------x------------------x------x--------------- 
+ 01596 -------x-------x------------------------------------------x--x------x--------------- 
+ 01680 ------x--------x----------------------------------x----------x------x--------------- 
+ 01764 -------x------x---------------------------x------------------x------x--------------- 
+ 01848 ------x-------x-------------------x--------------------------x------x--------------- 
  01932 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
  02016 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
  02100 -----------------------------------------------------------------------------------x 
@@ -274,10 +274,10 @@ Pin #21 Node 32 ,42  14370 Mode  --x  14403 xxxx
  02688 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
  02772 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
  02856 ------------------------------------------------------------x--------x----x--------- 
- 02940 -------x-------x---------------------------------------------x----x--x-------------- 
- 03024 ------x--------x------------------------------------------x--x-------x-------------- 
- 03108 -------x------x-----------------------------------x----------x-------x-------------- 
- 03192 ------x-------x---------------------------x------------------x-------x-------------- 
+ 02940 -------x-------x------------------------------------------x--x-------x-------------- 
+ 03024 ------x--------x----------------------------------x----------x-------x-------------- 
+ 03108 -------x------x---------------------------x------------------x-------x-------------- 
+ 03192 ------x-------x-------------------x--------------------------x-------x-------------- 
  03276 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
  03360 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
  03444 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
@@ -367,7 +367,7 @@ Pin #17 Node 28 ,38  14382 Mode  xx-  14419 xx-x
  10164 -----------------------------------------------------------------------------------x 
  10248 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
  10332 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
- 10416 -----------------------------------x------------------------------------------------ 
+ 10416 -------------------------------------------------------------------x---------------- 
 Pin #16 Node 27 ,37  14385 Mode  xx-  14423 xx-x 
  10500 ------x-------x----------------------------------------------x-------x-------------- 
  10584 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
@@ -385,7 +385,7 @@ Pin #16 Node 27 ,37  14385 Mode  xx-  14423 xx-x
  11592 -----------------------------------------------------------------------------------x 
  11676 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
  11760 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
- 11844 -----------------------------------x------------------------------------------------ 
+ 11844 -------------------------------------------------------------------x---------------- 
 Pin #15 Node 26 ,36  14388 Mode  xx-  14427 xx-x 
  11928 ------x------------------------------------------------------x-------x-------------- 
  12012 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
@@ -401,7 +401,7 @@ Pin #15 Node 26 ,36  14388 Mode  xx-  14427 xx-x
  12852 -----------------------------------------------------------------------------------x 
  12936 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
  13020 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
- 13104 -----------------------------------x------------------------------------------------ 
+ 13104 -------------------------------------------------------------------x---------------- 
 Pin #14 Node 25 ,35  14391 Mode  xx-  14431 xx-x 
  13188 -------------------------------------------------------------x-------x-------------- 
  13272 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
@@ -415,7 +415,7 @@ Pin #14 Node 25 ,35  14391 Mode  xx-  14431 xx-x
  13944 -----------------------------------------------------------------------------------x 
  14028 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
  14112 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
- 14196 -----------------------------------x------------------------------------------------ 
+ 14196 -------------------------------------------------------------------x---------------- 
 
 
 LEGEND    X : fuse not blown 
@@ -429,11 +429,11 @@ LEGEND    X : fuse not blown
                               |     Key      |
                       CLK x---|1           24|---x Vcc                      
                     K_ack x---|2           23|---x                          
-                       M0 x---|3           22|---x K_val                    
-                       M1 x---|4           21|---x D3                       
-                       M2 x---|5           20|---x D2                       
-                       M3 x---|6           19|---x D1                       
-                       OE x---|7           18|---x D0                       
+                       OE x---|3           22|---x K_val                    
+                      LN0 x---|4           21|---x COL3                     
+                      LN1 x---|5           20|---x COL2                     
+                      LN2 x---|6           19|---x COL1                     
+                      LN3 x---|7           18|---x COL0                     
                           x---|8           17|---x K3                       
                           x---|9           16|---x K2                       
                           x---|10          15|---x K1                       

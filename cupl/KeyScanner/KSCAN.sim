@@ -2,21 +2,21 @@
 PIN  32 =  C0 
 PIN  33 =  C1 
 PIN   1 =  CLK 
-PIN  18 =  D0 
-PIN  19 =  D1 
-PIN  20 =  D2 
-PIN  21 =  D3 
+PIN  18 =  COL0 
+PIN  19 =  COL1 
+PIN  20 =  COL2 
+PIN  21 =  COL3 
 PIN  14 =  K0 
 PIN  15 =  K1 
 PIN  16 =  K2 
 PIN  17 =  K3 
 PIN   2 =  K_ack 
 PIN  22 =  K_val 
-PIN   3 =  M0 
-PIN   4 =  M1 
-PIN   5 =  M2 
-PIN   6 =  M3 
-PIN   7 =  OE 
+PIN   4 =  LN0 
+PIN   5 =  LN1 
+PIN   6 =  LN2 
+PIN   7 =  LN3 
+PIN   3 =  OE 
 %END
 
 %FIELD
@@ -25,10 +25,10 @@ PIN   7 =  OE
 %EQUATION
 C0.d  =>
     C0 & !C1 & !K_ack
-  # !C0 & !C1 & !K0 & !K1 & !M0
-  # !C0 & !C1 & K0 & !K1 & !M1
-  # !C0 & !C1 & !K0 & K1 & !M2
-  # !C0 & !C1 & K0 & K1 & !M3
+  # !C0 & !C1 & !K0 & !K1 & !LN0
+  # !C0 & !C1 & K0 & !K1 & !LN1
+  # !C0 & !C1 & !K0 & K1 & !LN2
+  # !C0 & !C1 & K0 & K1 & !LN3
 
 C0.ar  =>
     0 
@@ -41,10 +41,10 @@ C0.sp C1.sp K0.sp K1.sp K2.sp K3.sp  =>
 
 C1.d  =>
     C0 & !C1 & K_ack
-  # !C0 & C1 & !K0 & !K1 & !M0
-  # !C0 & C1 & K0 & !K1 & !M1
-  # !C0 & C1 & !K0 & K1 & !M2
-  # !C0 & C1 & K0 & K1 & !M3
+  # !C0 & C1 & !K0 & !K1 & !LN0
+  # !C0 & C1 & K0 & !K1 & !LN1
+  # !C0 & C1 & !K0 & K1 & !LN2
+  # !C0 & C1 & K0 & K1 & !LN3
 
 C1.ar  =>
     0 
@@ -57,16 +57,16 @@ C1.sp  =>
 CE =>
     !C0 & !C1
 
-!D0 =>
+!COL0 =>
     !K2 & !K3
 
-!D1 =>
+!COL1 =>
     K2 & !K3
 
-!D2 =>
+!COL2 =>
     !K2 & K3
 
-!D3 =>
+!COL3 =>
     K2 & K3
 
 K0.t  =>
@@ -126,15 +126,15 @@ K3.oe  =>
 K3.sp  =>
     
 K_press =>
-    !K0 & K1 & !M2
-  # !K0 & !M0 & !M2
-  # !K0 & !K1 & !M0
-  # K0 & !K1 & !M1
-  # !K1 & !M0 & !M1
-  # K1 & !M2 & !M3
-  # !M0 & !M1 & !M2 & !M3
-  # K0 & !M1 & !M3
-  # K0 & K1 & !M3
+    !K0 & K1 & !LN2
+  # !K0 & !LN0 & !LN2
+  # !K0 & !K1 & !LN0
+  # K0 & !K1 & !LN1
+  # !K1 & !LN0 & !LN1
+  # K1 & !LN2 & !LN3
+  # !LN0 & !LN1 & !LN2 & !LN3
+  # K0 & !LN1 & !LN3
+  # K0 & K1 & !LN3
 
 K_scan =>
     !C0 & !C1
@@ -142,16 +142,16 @@ K_scan =>
 K_val =>
     C0 & !C1
 
-D0.oe  =>
+COL0.oe  =>
     1 
 
-D1.oe  =>
+COL1.oe  =>
     1 
 
-D2.oe  =>
+COL2.oe  =>
     1 
 
-D3.oe  =>
+COL3.oe  =>
     1 
 
 K_val.oe  =>

@@ -1,5 +1,5 @@
 /**
- * Kit pin interface masks |****||****|
+ * Kit pin IO interface masks
  */
 public class Pin {
 

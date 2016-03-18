@@ -1,0 +1,277 @@
+%SIGNAL
+PIN  14 =  D0 
+PIN  15 =  D1 
+PIN  16 =  D2 
+PIN  17 =  D3 
+PIN  18 =  D4 
+PIN  19 =  D5 
+PIN  20 =  D6 
+PIN  21 =  D7 
+PIN  22 =  D8 
+PIN  23 =  D9 
+PIN   1 =  SCLK 
+PIN   3 =  adress0 
+PIN   4 =  adress1 
+PIN   5 =  adress2 
+PIN   6 =  adress3 
+PIN   2 =  data 
+PIN   7 =  enable 
+%END
+
+%FIELD
+FIELD sel = adress3,adress2,adress1,adress0
+%END
+
+%EQUATION
+D0.d  =>
+    D0 & adress0
+  # D0 & adress1
+  # D0 & adress2
+  # D0 & adress3
+  # D0 & !enable
+  # !adress0 & !adress1 & !adress2 & !adress3 & data & enable
+
+D0.ar  =>
+    0 
+
+D0.ck  =>
+    SCLK
+
+D0.sp D1.sp D2.sp D3.sp D4.sp D5.sp D6.sp D7.sp D8.sp D9.sp  =>
+    0 
+
+D1.d  =>
+    D1 & !adress0
+  # D1 & adress1
+  # D1 & adress2
+  # D1 & adress3
+  # D1 & !enable
+  # adress0 & !adress1 & !adress2 & !adress3 & data & enable
+
+D1.ar  =>
+    0 
+
+D1.ck  =>
+    SCLK
+
+D1.sp  =>
+    
+D2.d  =>
+    D2 & adress0
+  # D2 & !adress1
+  # D2 & adress2
+  # D2 & adress3
+  # D2 & !enable
+  # !adress0 & adress1 & !adress2 & !adress3 & data & enable
+
+D2.ar  =>
+    0 
+
+D2.ck  =>
+    SCLK
+
+D2.sp  =>
+    
+D3.d  =>
+    D3 & !adress0
+  # D3 & !adress1
+  # D3 & adress2
+  # D3 & adress3
+  # D3 & !enable
+  # adress0 & adress1 & !adress2 & !adress3 & data & enable
+
+D3.ar  =>
+    0 
+
+D3.ck  =>
+    SCLK
+
+D3.sp  =>
+    
+D4.d  =>
+    D4 & adress0
+  # D4 & adress1
+  # D4 & !adress2
+  # D4 & adress3
+  # D4 & !enable
+  # !adress0 & !adress1 & adress2 & !adress3 & data & enable
+
+D4.ar  =>
+    0 
+
+D4.ck  =>
+    SCLK
+
+D4.sp  =>
+    
+D5.d  =>
+    D5 & !adress0
+  # D5 & adress1
+  # D5 & !adress2
+  # D5 & adress3
+  # D5 & !enable
+  # adress0 & !adress1 & adress2 & !adress3 & data & enable
+
+D5.ar  =>
+    0 
+
+D5.ck  =>
+    SCLK
+
+D5.sp  =>
+    
+D6.d  =>
+    D6 & adress0
+  # D6 & !adress1
+  # D6 & !adress2
+  # D6 & adress3
+  # D6 & !enable
+  # !adress0 & adress1 & adress2 & !adress3 & data & enable
+
+D6.ar  =>
+    0 
+
+D6.ck  =>
+    SCLK
+
+D6.sp  =>
+    
+D7.d  =>
+    D7 & !adress0
+  # D7 & !adress1
+  # D7 & !adress2
+  # D7 & adress3
+  # D7 & !enable
+  # adress0 & adress1 & adress2 & !adress3 & data & enable
+
+D7.ar  =>
+    0 
+
+D7.ck  =>
+    SCLK
+
+D7.sp  =>
+    
+D8.d  =>
+    D8 & adress0
+  # D8 & adress1
+  # D8 & adress2
+  # D8 & !adress3
+  # D8 & !enable
+  # !adress0 & !adress1 & !adress2 & adress3 & data & enable
+
+D8.ar  =>
+    0 
+
+D8.ck  =>
+    SCLK
+
+D8.sp  =>
+    
+D9.d  =>
+    D9 & !adress0
+  # D9 & adress1
+  # D9 & adress2
+  # D9 & !adress3
+  # D9 & !enable
+  # adress0 & !adress1 & !adress2 & adress3 & data & enable
+
+D9.ar  =>
+    0 
+
+D9.ck  =>
+    SCLK
+
+D9.sp  =>
+    
+mem_enable0 =>
+    !adress0 & !adress1 & !adress2 & !adress3 & enable
+
+mem_enable1 =>
+    adress0 & !adress1 & !adress2 & !adress3 & enable
+
+mem_enable2 =>
+    !adress0 & adress1 & !adress2 & !adress3 & enable
+
+mem_enable3 =>
+    adress0 & adress1 & !adress2 & !adress3 & enable
+
+mem_enable4 =>
+    !adress0 & !adress1 & adress2 & !adress3 & enable
+
+mem_enable5 =>
+    adress0 & !adress1 & adress2 & !adress3 & enable
+
+mem_enable6 =>
+    !adress0 & adress1 & adress2 & !adress3 & enable
+
+mem_enable7 =>
+    adress0 & adress1 & adress2 & !adress3 & enable
+
+mem_enable8 =>
+    !adress0 & !adress1 & !adress2 & adress3 & enable
+
+mem_enable9 =>
+    adress0 & !adress1 & !adress2 & adress3 & enable
+
+sel_enable0 =>
+    !adress0 & !adress1 & !adress2 & !adress3
+
+sel_enable1 =>
+    adress0 & !adress1 & !adress2 & !adress3
+
+sel_enable2 =>
+    !adress0 & adress1 & !adress2 & !adress3
+
+sel_enable3 =>
+    adress0 & adress1 & !adress2 & !adress3
+
+sel_enable4 =>
+    !adress0 & !adress1 & adress2 & !adress3
+
+sel_enable5 =>
+    adress0 & !adress1 & adress2 & !adress3
+
+sel_enable6 =>
+    !adress0 & adress1 & adress2 & !adress3
+
+sel_enable7 =>
+    adress0 & adress1 & adress2 & !adress3
+
+sel_enable8 =>
+    !adress0 & !adress1 & !adress2 & adress3
+
+sel_enable9 =>
+    adress0 & !adress1 & !adress2 & adress3
+
+D0.oe  =>
+    1 
+
+D1.oe  =>
+    1 
+
+D2.oe  =>
+    1 
+
+D3.oe  =>
+    1 
+
+D4.oe  =>
+    1 
+
+D5.oe  =>
+    1 
+
+D6.oe  =>
+    1 
+
+D7.oe  =>
+    1 
+
+D8.oe  =>
+    1 
+
+D9.oe  =>
+    1 
+
+%END

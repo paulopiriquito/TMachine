@@ -1,0 +1,183 @@
+{COMPONENT C:\USERS\A3908\DROPBOX\ENGENHARIA\ISEL\LIC\TRABALHOS\HARDWARE\KSCAN.SYM
+
+ {ENVIRONMENT
+  {PDIFvrev 3.00}
+  {Program "CUPL(WM) Version 5.0a"}
+  {DBtype "Schematic"}
+  {DBvrev 1.01}
+  {DBtime "Wed Mar 16 20:18:17 2016 "}
+  {DBunit "MIL"}
+  {DBgrid 10}
+  {Lyrstr "WIRES" 1 "BUS" 1 "GATE" 2 "IEEE" 2 "PINFUN" 3 "PINNUM" 1 
+          "PINNAM" 6 "PINCON" 4 "REFDES" 2 "ATTR" 6 "SDOT" 1 
+          "DEVICE" 5 "OUTLIN" 5 "ATTR2" 6 "NOTES" 6 "NETNAM" 4 
+          "CMPNAM" 5 "BORDER" 5}
+ }
+
+ {USER
+  {VIEW
+   {Mode SYMB}
+   {Nlst OPEN}
+   {Vw 0 0 2}
+   {Lv 12 2 2 2 0 0 2 2 2 2 0 0 2 1 2 0 0 0 0}
+   {Gs 10 10}
+  }
+ }
+
+ {DISPLAY
+  [Ly "PINNUM"]
+  [Ls "SOLID"][Wd 0]
+  [Ts 15][Tj "LC"][Tr 0][Tm "N"]
+ }
+
+ {SYMBOL
+  {PIN_DEF
+   [Ly "PINCON"]
+   {P CLK {Pt "INPUT"}{Lq 0}{Ploc 100 160}}
+   {P K_ACK {Pt "INPUT"}{Lq 0}{Ploc 100 120}}
+   {P M0 {Pt "INPUT"}{Lq 0}{Ploc 100 100}}
+   {P M1 {Pt "INPUT"}{Lq 0}{Ploc 100 80}}
+   {P M2 {Pt "INPUT"}{Lq 0}{Ploc 100 60}}
+   {P M3 {Pt "INPUT"}{Lq 0}{Ploc 100 40}}
+   {P OE {Pt "INPUT"}{Lq 0}{Ploc 100 20}}
+   {P D0 {Pt "I/O"}{Lq 0}{Ploc 300 20}}
+   {P D1 {Pt "I/O"}{Lq 0}{Ploc 300 40}}
+   {P D2 {Pt "I/O"}{Lq 0}{Ploc 300 60}}
+   {P D3 {Pt "I/O"}{Lq 0}{Ploc 300 80}}
+   {P K_VAL {Pt "I/O"}{Lq 0}{Ploc 300 100}}
+   {P K0 {Pt "OUTPUT"}{Lq 0}{Ploc 300 120}}
+   {P K1 {Pt "OUTPUT"}{Lq 0}{Ploc 300 140}}
+   {P K2 {Pt "OUTPUT"}{Lq 0}{Ploc 300 160}}
+   {P K3 {Pt "OUTPUT"}{Lq 0}{Ploc 300 180}}
+  }
+
+  {PKG
+   [Ly "REFDES"]
+   [Ts 25][Tj "CB"][Tr 0][Tm "N"]
+   {Rdl 200 210}
+
+   [Ly "PINNUM"]
+   [Ts 15][Tj "RC"]
+   {Pnl 120 170}
+   [Ts 15][Tj "RC"]
+   {Pnl 120 130}
+   {Pnl 120 110}
+   {Pnl 120 90}
+   {Pnl 120 70}
+   {Pnl 120 50}
+   {Pnl 120 30}
+   [Ts 15][Tj "LC"]
+   {Pnl 280 30}
+   {Pnl 280 50}
+   {Pnl 280 70}
+   {Pnl 280 90}
+   {Pnl 280 110}
+   {Pnl 280 130}
+   {Pnl 280 150}
+   {Pnl 280 170}
+   {Pnl 280 190}
+
+   {Sd A 1 2 3 4 5 6 7 18 19 20 21 22 14 15 16 17}
+  }
+
+  {PIC
+   [Ly "GATE"]
+   [Ts 15][Tj "LC"][Tr 0][Tm "N"]
+   {R 130 200 270 0}
+   {L 130 160 100 160}
+   {L 130 170 140 160 130 150}
+   {L 130 120 100 120}
+   {L 130 100 100 100}
+   {L 130 80 100 80}
+   {L 130 60 100 60}
+   {L 130 40 100 40}
+   {L 130 20 100 20}
+   {L 270 20 300 20}
+   {L 270 40 300 40}
+   {L 270 60 300 60}
+   {L 270 80 300 80}
+   {L 270 100 300 100}
+   {L 270 120 300 120}
+   {L 270 140 300 140}
+   {L 270 160 300 160}
+   {L 270 180 300 180}
+   [Ly "PINNAM"]
+   [Tj "LC"]
+   {T "CLK" 140 160}
+   {T "K_ACK" 140 120}
+   {T "M0" 140 100}
+   {T "M1" 140 80}
+   {T "M2" 140 60}
+   {T "M3" 140 40}
+   {T "OE" 140 20}
+   [Tj "RC"]
+   {T "D0" 260 20}
+   {T "D1" 260 40}
+   {T "D2" 260 60}
+   {T "D3" 260 80}
+   {T "K_VAL" 260 100}
+   {T "K0" 260 120}
+   {T "K1" 260 140}
+   {T "K2" 260 160}
+   {T "K3" 260 180}
+   [Ly "DEVICE"]
+   [Tj "CT"]
+   {T "V750C" 200 -10}
+  }
+
+  {ATR
+   {IN
+    {Org 100 20}
+    {Ty 255}
+   }
+   {EX
+    [Ly "ATTR2"]
+    [Ts 12][Tj "CT"][Tr 0][Tm "N"]
+    {At PLD C:\USERS\A3908\DROPBOX\ENGENHARIA\ISEL\LIC\TRABALHOS\HARDWARE\KSCAN 200 200}
+   }
+  }
+ }
+
+ {DETAIL
+  {ANNOTATE
+  }
+
+  {NET_DEF
+   {N CLK
+   }
+   {N K_ACK
+   }
+   {N M0
+   }
+   {N M1
+   }
+   {N M2
+   }
+   {N M3
+   }
+   {N OE
+   }
+   {N D0
+   }
+   {N D1
+   }
+   {N D2
+   }
+   {N D3
+   }
+   {N K_VAL
+   }
+   {N K0
+   }
+   {N K1
+   }
+   {N K2
+   }
+   {N K3
+   }
+  }
+
+  {SUBCOMP
+  }
+ }
+}

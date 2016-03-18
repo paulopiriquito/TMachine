@@ -1,0 +1,47 @@
+Name     BitMemory ;
+PartNo   02 ;
+Date     16/03/2016 ;
+Revision 01 ;
+Designer Engineer ;
+Company  CCISEL ;
+Assembly None ;
+Location  ;
+Device   v750c ;
+
+
+//Input Pins
+
+PIN 1 = SCLK;
+PIN 2 = data;
+PIN [3..6] = [adress0..3];
+PIN 7 = enable;
+
+
+//Output Pins
+
+PIN [14..23] = [D0..9];
+
+/* Address Decoder */
+FIELD sel = [adress3..0];
+
+sel_enable0 = sel:'d'0;
+sel_enable1 = sel:'d'1;
+sel_enable2 = sel:'d'2;
+sel_enable3 = sel:'d'3;
+sel_enable4 = sel:'d'4;
+sel_enable5 = sel:'d'5;
+sel_enable6 = sel:'d'6;
+sel_enable7 = sel:'d'7;
+sel_enable8 = sel:'d'8;
+sel_enable9 = sel:'d'9;
+
+
+/* Memory Register */
+
+[mem_enable0..9] = enable & [sel_enable0..9];
+
+[D0..9].ck = SCLK;
+[D0..9].ar = 'b'0;
+[D0..9].sp = 'b'0;
+
+[D0..9].d = ([mem_enable0..9] & data)  # (![mem_enable0..9] & [D0..9]);

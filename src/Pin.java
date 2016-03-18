@@ -4,7 +4,7 @@
 public class Pin {
 
     /**
-     * Input pin masks   |****||****|
+     * Input pin masks
      */
     public static final int
             K_DATA = 0x0f, // |****||++++|
@@ -13,7 +13,7 @@ public class Pin {
     ;
 
     /**
-     * Output pin masks  |****||****|
+     * Output pin masks
      */
     public static final int
             K_OE = 0x01, //   |****||***+|

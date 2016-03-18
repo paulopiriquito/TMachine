@@ -7,6 +7,7 @@ import isel.leic.utils.Time;
 public class Kit {
     private static int currentOutValue;
 
+
     /**
      * Inicia a classe
      */

@@ -9,13 +9,13 @@ Location  ;
 Device   v750c ;
 
 PIN [14..17] = [K0..3];
-PIN [18..21] = [D0..3];
+PIN [18..21] = [COL0..3];
 PIN 22 = K_val;
 
 PIN 1 = CLK;
 PIN 2 = K_ack;
-PIN [3..6] = [M0..3];
-PIN 7 = OE;
+PIN 3 = OE;
+PIN [4..7] = [LN0..3];
 
 PINNODE [32,33] = [C0,C1];
 
@@ -37,13 +37,13 @@ K3.t = K2 & K1 & K0 & CE;
 
 /*Decoder*/
 
-!D0 = !K2 & !K3;
-!D1 =  K2 & !K3;
-!D2 = !K2 & K3;
-!D3 =  K2 & K3;
+!COL0 = !K2 & !K3;
+!COL1 =  K2 & !K3;
+!COL2 = !K2 & K3;
+!COL3 =  K2 & K3;
 
 /*Mux*/
-K_press = !((!K0 & !K1 & M0) # (K0 & !K1 & M1) # (!K0 & K1 & M2) # (K0 & K1 & M3));
+K_press = !((!K0 & !K1 & LN0) # (K0 & !K1 & LN1) # (!K0 & K1 & LN2) # (K0 & K1 & LN3));
 
 /*Control*/
 [C0,C1].ar = 'b'0;

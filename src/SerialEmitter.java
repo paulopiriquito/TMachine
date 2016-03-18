@@ -46,5 +46,4 @@ public class SerialEmitter {
         return Kit.isBit(Pin.BUSY);
     }
 
-
 }

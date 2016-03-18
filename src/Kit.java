@@ -13,6 +13,7 @@ public class Kit {
         clear();
     }
 
+
     /**
      * Limpar a saída do USBPort
      */

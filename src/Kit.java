@@ -1,5 +1,6 @@
 import isel.leic.usbio.UsbPort;
 import isel.leic.utils.Time;
+
 /**
  * Virtualiza o acesso ao UsbPort
  */
@@ -12,7 +13,6 @@ public class Kit {
     public static void init(){
         clear();
     }
-
 
     /**
      * Limpar a saída do USBPort

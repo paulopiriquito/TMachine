@@ -14,7 +14,6 @@ public class Pin {
 
     /**
      * Output pin masks
-     * O joão é panaca
      */
     public static final int
             K_OE = 0x01, //   |****||***+|
@@ -23,6 +22,4 @@ public class Pin {
             SDX = 0x08,   //  |****||+***|
             IOSsel = 0x10 //  |***+||****|
     ;
-
-    //E também é blup
 }

@@ -8,6 +8,7 @@ public class SerialEmitter {
      * Inicia a classe
      */
     public static void init(){
+        //noinspection StatementWithEmptyBody
         while (isBusy()) //Espera até o ios estar disponivel para transmissão
             ;
         Kit.clrBits(Pin.SCLK);
@@ -23,7 +24,7 @@ public class SerialEmitter {
         init();  //Prepara o inicio do envio
         Kit.clrBits(Pin.IOSsel); //Liga a recepção IOS //TODO check if ios_sel is inverted
 
-        if(addr) //Selecciona o dispositivo receptor
+        if(addr) //Selecciona o dispositivo receptor (LnT)
             Kit.setBits(Pin.SDX);
 
         for (int i = 0; i < DATA_LENGTH; i++) {

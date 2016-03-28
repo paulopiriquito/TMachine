@@ -5,7 +5,7 @@ import isel.leic.utils.Time;
  */
 public class Kbd {
     public static final char NONE = 0;
-    private static final char[] translate={'D','0','*','#','4','6','5','B','1','3','2','A','7','9','8','C'};
+      private static final char[] translate={'1','4','7','*','2','5','8','0','3','6','9','#','A','B','C','D'};
 
     /**
      * Inicia a classe
@@ -22,12 +22,10 @@ public class Kbd {
     public static char getKey(){
         char key = NONE;
         if(Kit.isBit(Pin.K_VAL)){
-            Kit.setBits(Pin.K_OE);
-            Kit.sleep(10);
             key = translate[Kit.readBits(Pin.K_DATA)];
-            Kit.clrBits(Pin.K_OE);
             Kit.setBits(Pin.K_ACK);
-            Kit.sleep(10);
+            while (Kit.isBit(Pin.K_VAL))
+                ;
             Kit.clrBits(Pin.K_ACK);
         }
         return key;
@@ -52,13 +50,11 @@ public class Kbd {
     public static void main(String[] args) {
         Kit.init();
         Kbd.init();
-        while (Kit.isBit(0x10)){
-            char key = waitKey(500);
-            if (key == NONE){
-                System.out.println("NONE");
-            }
-            else
+        while (Kit.isBit(0x80)){
+            char key = getKey();
+            if (key != NONE){
                 System.out.println(key);
+            }
         }
     }
 }

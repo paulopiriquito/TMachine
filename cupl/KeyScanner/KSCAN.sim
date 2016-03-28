@@ -11,6 +11,7 @@ PIN  15 =  K1
 PIN  16 =  K2 
 PIN  17 =  K3 
 PIN   2 =  K_ack 
+PIN  23 =  K_press 
 PIN  22 =  K_val 
 PIN   4 =  LN0 
 PIN   5 =  LN1 
@@ -25,10 +26,7 @@ PIN   3 =  OE
 %EQUATION
 C0.d  =>
     C0 & !C1 & !K_ack
-  # !C0 & !C1 & !K0 & !K1 & !LN0
-  # !C0 & !C1 & K0 & !K1 & !LN1
-  # !C0 & !C1 & !K0 & K1 & !LN2
-  # !C0 & !C1 & K0 & K1 & !LN3
+  # !C0 & !C1 & K_press
 
 C0.ar  =>
     0 
@@ -40,11 +38,9 @@ C0.sp C1.sp K0.sp K1.sp K2.sp K3.sp  =>
     0 
 
 C1.d  =>
-    C0 & !C1 & K_ack
-  # !C0 & C1 & !K0 & !K1 & !LN0
-  # !C0 & C1 & K0 & !K1 & !LN1
-  # !C0 & C1 & !K0 & K1 & !LN2
-  # !C0 & C1 & K0 & K1 & !LN3
+    !C0 & C1 & K_ack
+  # C0 & !C1 & K_ack
+  # !C0 & C1 & K_press
 
 C1.ar  =>
     0 
@@ -76,7 +72,7 @@ K0.ar  =>
     0 
 
 K0.ck  =>
-    CLK
+    !CLK
 
 K0.oe  =>
     OE
@@ -90,7 +86,7 @@ K1.ar  =>
     0 
 
 K1.ck  =>
-    CLK
+    !CLK
 
 K1.oe  =>
     OE
@@ -104,7 +100,7 @@ K2.ar  =>
     0 
 
 K2.ck  =>
-    CLK
+    !CLK
 
 K2.oe  =>
     OE
@@ -118,7 +114,7 @@ K3.ar  =>
     0 
 
 K3.ck  =>
-    CLK
+    !CLK
 
 K3.oe  =>
     OE
@@ -126,15 +122,10 @@ K3.oe  =>
 K3.sp  =>
     
 K_press =>
-    !K0 & K1 & !LN2
-  # !K0 & !LN0 & !LN2
-  # !K0 & !K1 & !LN0
-  # K0 & !K1 & !LN1
-  # !K1 & !LN0 & !LN1
-  # K1 & !LN2 & !LN3
-  # !LN0 & !LN1 & !LN2 & !LN3
-  # K0 & !LN1 & !LN3
-  # K0 & K1 & !LN3
+    !K0 & !K1 & LN0
+  # K0 & !K1 & LN1
+  # !K0 & K1 & LN2
+  # K0 & K1 & LN3
 
 K_scan =>
     !C0 & !C1
@@ -152,6 +143,9 @@ COL2.oe  =>
     1 
 
 COL3.oe  =>
+    1 
+
+K_press.oe  =>
     1 
 
 K_val.oe  =>

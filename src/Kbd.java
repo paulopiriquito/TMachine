@@ -11,7 +11,6 @@ public class Kbd {
      * Inicia a classe
      */
     public static void init(){
-        Kit.clrBits(Pin.K_OE);
         Kit.clrBits(Pin.K_ACK);
     }
 
@@ -38,23 +37,24 @@ public class Kbd {
      */
     public static char waitKey(long timeout){
         timeout += Time.getTimeInMillis();
-        char key = NONE;
-        do{
-            key = getKey();
+        char key;
 
-        }
+        do
+            key = getKey();
         while (Time.getTimeInMillis() <= timeout && key == NONE);
+
         return key;
     }
 
     public static void main(String[] args) {
+        char key;
         Kit.init();
         Kbd.init();
-        while (Kit.isBit(0x80)){
-            char key = getKey();
-            if (key != NONE){
+        do{
+            key = getKey();
+            if (key != NONE)
                 System.out.println(key);
-            }
         }
+        while (key != 'D');
     }
 }

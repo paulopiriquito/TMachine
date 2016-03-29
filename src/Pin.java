@@ -16,10 +16,9 @@ public class Pin {
      * Output pin masks
      */
     public static final int
-            K_OE = 0x01, //   |****||***+|
-            K_ACK = 0x02, //  |****||**+*|
-            SCLK = 0x04, //   |****||*+**|
-            SDX = 0x08,   //  |****||+***|
-            IOSsel = 0x10 //  |***+||****|
+            K_ACK = 0x01, //  |****||***+|
+            SCLK = 0x02, //   |****||**+*|
+            SDX = 0x04,   //  |****||*+**|
+            IOSsel = 0x08 //  |****||+***|
     ;
 }

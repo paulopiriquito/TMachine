@@ -1,0 +1,132 @@
+%SIGNAL
+PIN  32 =  C0 
+PIN  33 =  C1 
+PIN  15 =  DXval 
+PIN  17 =  Q0 
+PIN  18 =  Q1 
+PIN  19 =  Q2 
+PIN  20 =  Q3 
+PIN   1 =  SCLK 
+PIN   2 =  SS 
+PIN   3 =  accept 
+PIN  16 =  busy 
+PIN  14 =  wr 
+%END
+
+%FIELD
+%END
+
+%EQUATION
+C0.d  =>
+    C0 & !C1 & Q0
+  # C0 & !C1 & !Q1
+  # C0 & !C1 & Q2
+  # C0 & !C1 & !Q3
+  # C0 & !C1 & !SS
+  # !C1 & !SCLK & !SS
+
+C0.ar  =>
+    0 
+
+C0.ck  =>
+    SCLK
+
+C0.sp C1.sp Q0.sp Q1.sp Q2.sp Q3.sp  =>
+    0 
+
+C1.d  =>
+    !C0 & C1 & !accept
+  # C0 & !C1 & !Q0 & Q1 & !Q2 & Q3 & SS
+
+C1.ar  =>
+    0 
+
+C1.ck  =>
+    SCLK
+
+C1.sp  =>
+    
+DXval =>
+    !C0 & C1
+
+Q0.t  =>
+    1 
+
+Q0.ar  =>
+    !C0 & !C1
+
+Q0.ck  =>
+    !SCLK
+
+Q0.sp  =>
+    
+Q1.t  =>
+    Q0
+
+Q1.ar  =>
+    !C0 & !C1
+
+Q1.ck  =>
+    !SCLK
+
+Q1.sp  =>
+    
+Q2.t  =>
+    Q0 & Q1
+
+Q2.ar  =>
+    !C0 & !C1
+
+Q2.ck  =>
+    !SCLK
+
+Q2.sp  =>
+    
+Q3.t  =>
+    Q0 & Q1 & Q2
+
+Q3.ar  =>
+    !C0 & !C1
+
+Q3.ck  =>
+    !SCLK
+
+Q3.sp  =>
+    
+busy =>
+    !C0 & C1
+
+clr =>
+    !C0 & !C1
+
+enable =>
+    1 
+
+eq10 =>
+    !Q0 & Q1 & !Q2 & Q3
+
+wr =>
+    C0 & !C1
+
+DXval.oe  =>
+    1 
+
+Q0.oe  =>
+    1 
+
+Q1.oe  =>
+    1 
+
+Q2.oe  =>
+    1 
+
+Q3.oe  =>
+    1 
+
+busy.oe  =>
+    1 
+
+wr.oe  =>
+    1 
+
+%END

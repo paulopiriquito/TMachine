@@ -1,0 +1,62 @@
+Name     SerialControl ;
+PartNo   02 ;
+Date     30/03/2016 ;
+Revision 01 ;
+Designer Engineer ;
+Company  CCISEL ;
+Assembly None ;
+Location ISEL ;
+Device   v750c ;
+
+
+Pin 1 = SCLK;
+Pin 2 = SS;
+Pin 3 = accept;
+
+Pin 14 = wr;
+Pin 15 = DXval;
+Pin 16 = busy;
+Pin [17..20] = [Q0..3];
+
+
+Pinnode [32,33] = [C0,C1];
+
+
+/*Contador*/
+
+enable = 'b'1;
+
+[Q0..3].ar = clr;
+[Q0..3].sp = 'b'0;
+[Q0..3].ck = !SCLK;
+
+Q0.t = enable;
+Q1.t = Q0 & enable;
+Q2.t = Q1 & Q0 & enable;
+Q3.t = Q2 & Q1 & Q0 & enable;
+
+/*Equals 10*/
+eq10 = !Q0 & Q1 & !Q2 & Q3;
+
+/*Maquina de Estados */
+[C0..1].ck = SCLK;
+[C0..1].ar = 'b'0;
+[C0..1].sp = 'b'0;
+
+Sequence [C0,C1]{
+
+Present 0 
+	out clr;
+	if !SS & !SCLK next 1; 
+	default next 0;
+
+Present 1
+	out wr;
+	if SS & eq10 next 2;
+	default next 1;
+
+Present 2
+	out DXval, busy;
+	if accept next 0;
+	default next 2;
+}

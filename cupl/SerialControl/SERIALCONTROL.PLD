@@ -9,36 +9,41 @@ Location ISEL ;
 Device   v750c ;
 
 
-Pin 1 = SCLK;
-Pin 2 = SS;
-Pin 3 = accept;
+Pin 1 = SCLK;   //From UsbPort
+Pin 2 = SS;     //From UsbPort
+Pin 3 = accept; //From Dispatcher
 
-Pin 14 = wr;
-Pin 15 = DXval;
-Pin 16 = busy;
-Pin [17..20] = [Q0..3];
+Pin 14 = wr;    //To BitMemory
+Pin 15 = DXval;  //To Dispatcher
+Pin 16 = busy;  //To UsbPort
+Pin [17..20] = [Address0..3]; //To BitMemory
 
 
 Pinnode [32,33] = [C0,C1];
 
 
-/*Contador*/
+/*Address Counter*/
+/*Current register pointer*/
 
 enable = 'b'1;
 
-[Q0..3].ar = clr;
-[Q0..3].sp = 'b'0;
-[Q0..3].ck = !SCLK;
+[Address0..3].ar = clr;
+[Address0..3].sp = 'b'0;
+[Address0..3].ck = !SCLK;
 
-Q0.t = enable;
-Q1.t = Q0 & enable;
-Q2.t = Q1 & Q0 & enable;
-Q3.t = Q2 & Q1 & Q0 & enable;
+Address0.t = enable;
+Address1.t = Address0 & enable ;
+Address2.t = Address1 & Address0 & enable ;
+Address3.t = Address2 & Address1 & Address0 & enable ;
 
 /*Equals 10*/
-eq10 = !Q0 & Q1 & !Q2 & Q3;
+/*Checks if it's stream's end*/
 
-/*Maquina de Estados */
+eq10 = !Address0 & Address1 & !Address2 & Address3;
+
+/*Serial Control */
+/*Establishes bit reception protocol*/
+
 [C0..1].ck = SCLK;
 [C0..1].ar = 'b'0;
 [C0..1].sp = 'b'0;

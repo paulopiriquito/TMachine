@@ -5,7 +5,7 @@
 
 CUPL(WM)        5.0a Serial# 60008009
 Device          v750c  Library DLIB-h-40-2
-Created         Wed Mar 30 23:03:38 2016
+Created         Thu Mar 31 03:22:39 2016
 Name            SerialControl 
 Partno          02 
 Revision        01 
@@ -19,11 +19,59 @@ Location        ISEL
                             Expanded Product Terms
 ===============================================================================
 
+Address0.t  =>
+    1 
+
+Address0.ar  =>
+    !C0 & !C1
+
+Address0.ck  =>
+    !SCLK
+
+Address0.sp  =>
+    0 
+
+Address1.t  =>
+    Address0
+
+Address1.ar  =>
+    !C0 & !C1
+
+Address1.ck  =>
+    !SCLK
+
+Address1.sp  =>
+    0 
+
+Address2.t  =>
+    Address0 & Address1
+
+Address2.ar  =>
+    !C0 & !C1
+
+Address2.ck  =>
+    !SCLK
+
+Address2.sp  =>
+    0 
+
+Address3.t  =>
+    Address0 & Address1 & Address2
+
+Address3.ar  =>
+    !C0 & !C1
+
+Address3.ck  =>
+    !SCLK
+
+Address3.sp  =>
+    0 
+
 C0.d  =>
-    C0 & !C1 & Q0
-  # C0 & !C1 & !Q1
-  # C0 & !C1 & Q2
-  # C0 & !C1 & !Q3
+    Address0 & C0 & !C1
+  # !Address1 & C0 & !C1
+  # Address2 & C0 & !C1
+  # !Address3 & C0 & !C1
   # C0 & !C1 & !SS
   # !C1 & !SCLK & !SS
 
@@ -38,7 +86,7 @@ C0.sp  =>
 
 C1.d  =>
     !C0 & C1 & !accept
-  # C0 & !C1 & !Q0 & Q1 & !Q2 & Q3 & SS
+  # !Address0 & Address1 & !Address2 & Address3 & C0 & !C1 & SS
 
 C1.ar  =>
     0 
@@ -52,54 +100,6 @@ C1.sp  =>
 DXval =>
     !C0 & C1
 
-Q0.t  =>
-    1 
-
-Q0.ar  =>
-    !C0 & !C1
-
-Q0.ck  =>
-    !SCLK
-
-Q0.sp  =>
-    0 
-
-Q1.t  =>
-    Q0
-
-Q1.ar  =>
-    !C0 & !C1
-
-Q1.ck  =>
-    !SCLK
-
-Q1.sp  =>
-    0 
-
-Q2.t  =>
-    Q0 & Q1
-
-Q2.ar  =>
-    !C0 & !C1
-
-Q2.ck  =>
-    !SCLK
-
-Q2.sp  =>
-    0 
-
-Q3.t  =>
-    Q0 & Q1 & Q2
-
-Q3.ar  =>
-    !C0 & !C1
-
-Q3.ck  =>
-    !SCLK
-
-Q3.sp  =>
-    0 
-
 busy =>
     !C0 & C1
 
@@ -110,24 +110,24 @@ enable =>
     1 
 
 eq10 =>
-    !Q0 & Q1 & !Q2 & Q3
+    !Address0 & Address1 & !Address2 & Address3
 
 wr =>
     C0 & !C1
 
+Address0.oe  =>
+    1 
+
+Address1.oe  =>
+    1 
+
+Address2.oe  =>
+    1 
+
+Address3.oe  =>
+    1 
+
 DXval.oe  =>
-    1 
-
-Q0.oe  =>
-    1 
-
-Q1.oe  =>
-    1 
-
-Q2.oe  =>
-    1 
-
-Q3.oe  =>
     1 
 
 busy.oe  =>
@@ -145,6 +145,26 @@ Pin Variable                                    Pterms   Max     Min
 Pol   Name              Ext     Pin     Type     Used   Pterms  Level   
 --- --------            ---     ---     ----    ------  ------  -----   
 
+    Address0                    17       V        -       -       -     
+    Address0            t       17       X        1       14      2     
+    Address0            ar      17       X        1       1       1     
+    Address0            ck      17       X        1       1       1     
+    Address0            sp      17       X        1       1       1     
+    Address1                    18       V        -       -       -     
+    Address1            t       18       X        1       16      2     
+    Address1            ar      18       X        1       1       1     
+    Address1            ck      18       X        1       1       1     
+    Address1            sp      18       X        1       1       1     
+    Address2                    19       V        -       -       -     
+    Address2            t       19       X        1       16      2     
+    Address2            ar      19       X        1       1       1     
+    Address2            ck      19       X        1       1       1     
+    Address2            sp      19       X        1       1       1     
+    Address3                    20       V        -       -       -     
+    Address3            t       20       X        1       14      2     
+    Address3            ar      20       X        1       1       1     
+    Address3            ck      20       X        1       1       1     
+    Address3            sp      20       X        1       1       1     
     C0                          32       N        -       -       -     
     C0                  d       32       M        6       6       2     
     C0                  ar      32       M        1       1       1     
@@ -156,26 +176,6 @@ Pol   Name              Ext     Pin     Type     Used   Pterms  Level
     C1                  ck      33       M        1       1       1     
     C1                  sp      33       M        1       1       1     
     DXval                       15       V        1       10      2     
-    Q0                          17       V        -       -       -     
-    Q0                  t       17       X        1       14      2     
-    Q0                  ar      17       X        1       1       1     
-    Q0                  ck      17       X        1       1       1     
-    Q0                  sp      17       X        1       1       1     
-    Q1                          18       V        -       -       -     
-    Q1                  t       18       X        1       16      2     
-    Q1                  ar      18       X        1       1       1     
-    Q1                  ck      18       X        1       1       1     
-    Q1                  sp      18       X        1       1       1     
-    Q2                          19       V        -       -       -     
-    Q2                  t       19       X        1       16      2     
-    Q2                  ar      19       X        1       1       1     
-    Q2                  ck      19       X        1       1       1     
-    Q2                  sp      19       X        1       1       1     
-    Q3                          20       V        -       -       -     
-    Q3                  t       20       X        1       14      2     
-    Q3                  ar      20       X        1       1       1     
-    Q3                  ck      20       X        1       1       1     
-    Q3                  sp      20       X        1       1       1     
     SCLK                        1        V        -       -       -     
     SS                          2        V        -       -       -     
     accept                      3        V        -       -       -     
@@ -184,11 +184,11 @@ Pol   Name              Ext     Pin     Type     Used   Pterms  Level
     enable                      0        I        1       -       -     
     eq10                        0        I        1       -       -     
     wr                          14       V        1       8       2     
+    Address0            oe      17       D        1       1       0     
+    Address1            oe      18       D        1       1       0     
+    Address2            oe      19       D        1       1       0     
+    Address3            oe      20       D        1       1       0     
     DXval               oe      15       D        1       1       0     
-    Q0                  oe      17       D        1       1       0     
-    Q1                  oe      18       D        1       1       0     
-    Q2                  oe      19       D        1       1       0     
-    Q3                  oe      20       D        1       1       0     
     busy                oe      16       D        1       1       0     
     wr                  oe      14       D        1       1       0     
 
@@ -401,10 +401,10 @@ LEGEND    X : fuse not blown
                        SS x---|2           23|---x                          
                    accept x---|3           22|---x                          
                           x---|4           21|---x                          
-                          x---|5           20|---x Q3                       
-                          x---|6           19|---x Q2                       
-                          x---|7           18|---x Q1                       
-                          x---|8           17|---x Q0                       
+                          x---|5           20|---x Address3                 
+                          x---|6           19|---x Address2                 
+                          x---|7           18|---x Address1                 
+                          x---|8           17|---x Address0                 
                           x---|9           16|---x busy                     
                           x---|10          15|---x DXval                    
                           x---|11          14|---x wr                       

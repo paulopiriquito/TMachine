@@ -22,7 +22,7 @@ public class SerialEmitter {
      */
     public static void send(boolean addr, int data){
         init();  //Prepara o inicio do envio
-        Kit.clrBits(Pin.IOSsel); //Liga a recepção IOS //TODO check if ios_sel is inverted
+        Kit.clrBits(Pin.IOSsel); //Liga a recepção IOS
 
         if(addr) //Selecciona o dispositivo receptor (LnT)
             Kit.setBits(Pin.SDX);
@@ -36,7 +36,7 @@ public class SerialEmitter {
 
         Kit.setBits(Pin.SCLK);   //Termina o envio da trama
         Kit.clrBits((Pin.SCLK)); //Termina o envio da trama
-        Kit.setBits(Pin.IOSsel); //Desliga a recepção do IOS //TODO check if ios_sel is inverted
+        Kit.setBits(Pin.IOSsel); //Desliga a recepção do IOS
     }
 
     /**

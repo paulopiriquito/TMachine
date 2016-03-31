@@ -23,7 +23,7 @@ PINNODE [32,33] = [C0,C1];
 [K0..3].oe = OE;
 
 
-/*Contador*/
+/*Counter*/
 CE = K_scan;
 
 [K0..3].ar = 'b'0;

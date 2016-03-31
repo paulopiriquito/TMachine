@@ -5,7 +5,7 @@
 
 CUPL(WM)        5.0a Serial# 60008009
 Device          v750c  Library DLIB-h-40-2
-Created         Mon Mar 28 20:22:22 2016
+Created         Thu Mar 31 03:47:28 2016
 Name            Key Decode 
 Partno          02 
 Revision        01 
@@ -33,9 +33,8 @@ C0.sp  =>
     0 
 
 C1.d  =>
-    !C0 & C1 & K_ack
-  # C0 & !C1 & K_ack
-  # !C0 & C1 & K_press
+    C0 & !C1 & K_ack
+  # !C0 & C1 & !K_ack & !K_press
 
 C1.ar  =>
     0 
@@ -166,7 +165,7 @@ Pol   Name              Ext     Pin     Type     Used   Pterms  Level
     C0                  ck      32       M        1       1       1     
     C0                  sp      32       M        1       1       1     
     C1                          33       N        -       -       -     
-    C1                  d       33       M        3       5       2     
+    C1                  d       33       M        2       5       2     
     C1                  ar      33       M        1       1       1     
     C1                  ck      33       M        1       1       1     
     C1                  sp      33       M        1       1       1     
@@ -250,9 +249,9 @@ Pin #22 Node 33 ,43  14367 Mode  ---  14399 xxxx
  01260 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
  01344 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
  01428 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
- 01512 -------------------------------------------------------------x------x------x-------- 
- 01596 ------------------------------------------------------------x--------x-----x-------- 
- 01680 -------------------------------------------------------------x------x------------x-- 
+ 01512 ------------------------------------------------------------x--------x-----x-------- 
+ 01596 -------------------------------------------------------------x------x-----x-----x--- 
+ 01680 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
  01764 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
  01848 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
  01932 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 

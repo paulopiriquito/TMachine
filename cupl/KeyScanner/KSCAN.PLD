@@ -64,7 +64,7 @@ if K_ack next 2;
 default next 1;
 
 present 2:
-if (K_ack # K_press) next 2;
+if (!K_ack & !K_press) next 2;
 default next 0;
 }
 

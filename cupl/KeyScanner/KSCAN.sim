@@ -38,9 +38,8 @@ C0.sp C1.sp K0.sp K1.sp K2.sp K3.sp  =>
     0 
 
 C1.d  =>
-    !C0 & C1 & K_ack
-  # C0 & !C1 & K_ack
-  # !C0 & C1 & K_press
+    C0 & !C1 & K_ack
+  # !C0 & C1 & !K_ack & !K_press
 
 C1.ar  =>
     0 

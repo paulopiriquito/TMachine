@@ -72,9 +72,8 @@ public class Kit {
      * @param value Valor a escrever
      */
     public static void writeBits(int mask, int value){
-        int result = mask & value;
-        currentOutValue &= result;
-        out(currentOutValue);
+        mask &= value;
+        out(mask);
     }
 
     /**

@@ -2,7 +2,8 @@
  * Envia tramas para o módulo Serial Receiver
  */
 public class SerialEmitter {
-    private static final int DATA_LENGTH = 9;
+    private static final int LCDsize = 9, TPRINTERsize = 5;
+    private static final boolean LCD = true, TPrinter = false;
 
     /**
      * Inicia a classe
@@ -11,8 +12,35 @@ public class SerialEmitter {
         //noinspection StatementWithEmptyBody
         while (isBusy()) //Espera até o ios estar disponivel para transmissão
             ;
+        Kit.setBits(Pin.IOSsel); //Desliga a recepção do IOS
+    }
+
+    /**
+     *
+     * @param frame
+     * @param size
+     */
+    private static void send(int frame, int size){
         Kit.clrBits(Pin.SCLK);
         Kit.clrBits(Pin.SDX);
+        Kit.clrBits(Pin.IOSsel); //Liga a recepção IOS
+
+        if(frame%2 == 1)//Set do primeiro bit
+            Kit.setBits(Pin.SDX);
+        else
+            Kit.clrBits((Pin.SDX));
+        frame >>= 1;
+
+        for (int i = 1; i < size; i++) {
+            Kit.setBits(Pin.SCLK);
+            if(frame%2 == 1) //Set do próximo bit
+                Kit.setBits(Pin.SDX);
+            else
+                Kit.clrBits((Pin.SDX));
+            frame >>= 1;
+            Kit.clrBits((Pin.SCLK));
+        }
+        Kit.setBits(Pin.IOSsel); //Desliga a recepção do IOS
     }
 
     /**
@@ -21,22 +49,18 @@ public class SerialEmitter {
      * @param data Data
      */
     public static void send(boolean addr, int data){
-        init();  //Prepara o inicio do envio
-        Kit.clrBits(Pin.IOSsel); //Liga a recepção IOS
-
-        if(addr) //Selecciona o dispositivo receptor (LnT)
-            Kit.setBits(Pin.SDX);
-
-        for (int i = 0; i < DATA_LENGTH; i++) {
-            Kit.setBits(Pin.SCLK);  //Envia o bit
-            Kit.writeBits(Pin.SDX, data%2);  //Set do próximo bit
-            data >>= 1;
-            Kit.clrBits((Pin.SCLK));
+        while (isBusy()) //Espera até o ios estar disponivel para transmissão
+            ;
+        //Selecciona o dispositivo receptor (LnT)
+        if(addr) { //LCD
+            data <<=1;
+            ++data;
+            send(data, LCDsize);          //Envia os bits da trama para o LCD
         }
-
-        Kit.setBits(Pin.SCLK);   //Termina o envio da trama
-        Kit.clrBits((Pin.SCLK)); //Termina o envio da trama
-        Kit.setBits(Pin.IOSsel); //Desliga a recepção do IOS
+        else{  //TicketPrinter
+            data <<=1;
+            send(data, TPRINTERsize);          //Envia os bits da trama para o LCD
+        }
     }
 
     /**
@@ -45,6 +69,11 @@ public class SerialEmitter {
      */
     public static boolean isBusy(){
         return Kit.isBit(Pin.BUSY);
+    }
+
+    public static void main (String[] args){
+        init();
+        send(LCD, 0b101010101);
     }
 
 }

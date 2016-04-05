@@ -5,10 +5,13 @@ import isel.leic.utils.Time;
  */
 public class Kbd {
     public static final char NONE = 0;
-      private static final char[] translate={'1','4','7','*','2','5','8','0','3','6','9','#','A','B','C','D'};
+
+    //Array para relação entre codigo das teclas e o caracter correspondente
+    private static final char[] translate={'1','4','7','*','2','5','8','0','3','6','9','#','A','B','C','D'};
 
     /**
      * Inicia a classe
+     * Define que quando o programa é iniciado K_ack encontra-se a low
      */
     public static void init(){
         Kit.clrBits(Pin.K_ACK);
@@ -20,10 +23,10 @@ public class Kbd {
      */
     public static char getKey(){
         char key = NONE;
-        if(Kit.isBit(Pin.K_VAL)){
+        if(Kit.isBit(Pin.K_VAL)){  //Se houver tecla premida
             key = translate[Kit.readBits(Pin.K_DATA)];
             Kit.setBits(Pin.K_ACK);
-            while (Kit.isBit(Pin.K_VAL))
+            while (Kit.isBit(Pin.K_VAL))  //Espera que o Key Decode retire o K_val
                 ;
             Kit.clrBits(Pin.K_ACK);
         }
@@ -38,7 +41,6 @@ public class Kbd {
     public static char waitKey(long timeout){
         timeout += Time.getTimeInMillis();
         char key;
-
         do
             key = getKey();
         while (Time.getTimeInMillis() <= timeout && key == NONE);
@@ -46,6 +48,11 @@ public class Kbd {
         return key;
     }
 
+    /**
+     * Método de teste da leitura de caracteres do teclado
+     * Imprime na consola o caracter das teclas premidas, termina a execução quando é premida a tecla 'D'
+     * @param args
+     */
     public static void main(String[] args) {
         char key;
         Kit.init();

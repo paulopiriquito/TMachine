@@ -2,16 +2,15 @@
  * Envia tramas para o módulo Serial Receiver
  */
 public class SerialEmitter {
-    private static final int LCDsize = 9, TPRINTERsize = 5;
+    private static final int FRAMESIZE = 10;
     private static final boolean LCD = true, TPrinter = false;
 
     /**
      * Inicia a classe
      */
     public static void init(){
-        //noinspection StatementWithEmptyBody
-        while (isBusy()) //Espera até o ios estar disponivel para transmissão
-            ;
+        Kit.clrBits(Pin.SCLK);
+        Kit.clrBits(Pin.SDX);
         Kit.setBits(Pin.IOSsel); //Desliga a recepção do IOS
     }
 
@@ -55,11 +54,11 @@ public class SerialEmitter {
         if(addr) { //LCD
             data <<=1;
             ++data;
-            send(data, LCDsize);          //Envia os bits da trama para o LCD
+            send(data, FRAMESIZE);          //Envia os bits da trama para o LCD
         }
         else{  //TicketPrinter
             data <<=1;
-            send(data, TPRINTERsize);          //Envia os bits da trama para o LCD
+            send(data, FRAMESIZE);          //Envia os bits da trama para o LCD
         }
     }
 
@@ -74,6 +73,7 @@ public class SerialEmitter {
     public static void main (String[] args){
         init();
         send(LCD, 0b101010101);
+        send(TPrinter, 0b10101);
     }
 
 }

@@ -51,15 +51,10 @@ public class SerialEmitter {
         while (isBusy()) //Espera até o ios estar disponivel para transmissão
             ;
         //Selecciona o dispositivo receptor (LnT)
-        if(addr) { //LCD
-            data <<=1;
-            ++data;
-            send(data, FRAMESIZE);          //Envia os bits da trama para o LCD
-        }
-        else{  //TicketPrinter
-            data <<=1;
-            send(data, FRAMESIZE);          //Envia os bits da trama para o LCD
-        }
+        data <<=1;
+        if(addr) //LCD
+            data |= 1;
+        send(data, FRAMESIZE);
     }
 
     /**

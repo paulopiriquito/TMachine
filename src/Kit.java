@@ -70,23 +70,21 @@ public class Kit {
     // escreve nos bits representados por mask o valor de value
     public static void writeBits(int mask, int value){
         out ((mask & value) | (~mask & currentOutput));
-
+        currentOutput =  Kit.in();
     }
 
 
     // coloca os bits representados por mask no valor lógico '1'
     public static void setBits(int mask){
         out( currentOutput | mask);
-
-
+        currentOutput = Kit.in();
     }
 
 
     // coloca os bits representados por mask no valor lógico '0'
     public static void clrBits(int mask){
         out(currentOutput & ~mask);
-
-
+        currentOutput = Kit.in();
     }
 
 

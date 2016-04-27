@@ -68,7 +68,6 @@ public class SerialEmitter {
     public static void main (String[] args){
         init();
         send(LCD, 0b101010101);
-        send(TPrinter, 0b10101);
     }
 
 }

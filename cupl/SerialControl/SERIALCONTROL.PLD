@@ -12,14 +12,17 @@ Device   v750c ;
 Pin 1 = SCLK;   //From UsbPort
 Pin 2 = SS;     //From UsbPort
 Pin 3 = accept; //From Dispatcher
+Pin 4 = CLK;    //From ATB
 
 Pin 14 = wr;    //To BitMemory
 Pin 15 = DXval;  //To Dispatcher
 Pin 16 = busy;  //To UsbPort
-Pin [17..20] = [Address0..3]; //To BitMemory
+Pin [18..21] = [Address0..3]; //To BitMemory
 
 
-Pinnode [32,33] = [C0,C1];
+Pin 17 = C0;
+Pin 22 = C1;
+
 
 
 /*Address Counter*/
@@ -44,24 +47,30 @@ eq10 = !Address0 & Address1 & !Address2 & Address3;
 /*Serial Control */
 /*Establishes bit reception protocol*/
 
-[C0..1].ck = SCLK;
+[C0..1].ck = CLK;
 [C0..1].ar = 'b'0;
 [C0..1].sp = 'b'0;
 
 Sequence [C0,C1]{
 
-Present 0 
+Present 0:
 	out clr;
-	if !SS & !SCLK next 1; 
-	default next 0;
-
-Present 1
-	out wr;
-	if SS & eq10 next 2;
+	if SS next 0;
 	default next 1;
 
-Present 2
+Present 1: 
+	out clr;
+	if !SS next 2; 
+	default next 1;
+
+Present 2:
+	out wr;
+	if !SS next 2;
+	if SS & eq10 next 3;
+	default next 0;
+
+Present 3:
 	out DXval, busy;
 	if accept next 0;
-	default next 2;
+	default next 3;
 }

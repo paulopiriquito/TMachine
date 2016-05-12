@@ -11,29 +11,14 @@ public class Kit {
 
     public static int currentOutput = 0x00;/* Variável de memória dos bits de saída */
 
-    public static void main(String[]args){
-        Kit.init();
-        for(int visual=1; Kit.isBit(0x08); visual<<=1){
-
-            Kit.setBits(visual);
-            Time.sleep(500);
-            if(visual==0x80){
-                Kit.clrBits(0xFF);
-                visual=1;
-            }
-        }
-
-        UsbPort.out(0x55);
-    }
 
     public static void sleep(long milis) {
         Time.sleep(milis);
     }
 
 
-    //nega a entrada
+    //inverte a entrada
     public static int in(){
-
         return ~UsbPort.in();
     }
 
@@ -55,9 +40,7 @@ public class Kit {
     // retorna true se o bit tiver valor logico '1'
     public static boolean isBit(int mask){
         int a = in() & mask;
-
-        return a!=0;
-
+        return a != 0;
     }
 
 
@@ -70,27 +53,17 @@ public class Kit {
     // escreve nos bits representados por mask o valor de value
     public static void writeBits(int mask, int value){
         out ((mask & value) | (~mask & currentOutput));
-        currentOutput =  Kit.in();
     }
 
 
     // coloca os bits representados por mask no valor lógico '1'
     public static void setBits(int mask){
         out( currentOutput | mask);
-        currentOutput = Kit.in();
     }
 
 
     // coloca os bits representados por mask no valor lógico '0'
     public static void clrBits(int mask){
         out(currentOutput & ~mask);
-        currentOutput = Kit.in();
     }
-
-
-
-
-
-
-
 }

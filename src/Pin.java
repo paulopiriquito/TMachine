@@ -17,6 +17,7 @@ public class Pin {
      */
     public static final int
             K_ACK = 0x01, //  |****||***+|
+            K_OE = 0x10, //   |***+||****|
             SCLK = 0x02, //   |****||**+*|
             SDX = 0x04,   //  |****||*+**|
             IOSsel = 0x08 //  |****||+***|

@@ -1,0 +1,70 @@
+Name     Key Decode ;
+PartNo   02 ;
+Date     09/03/2016 ;
+Revision 01 ;
+Designer Engineer ;
+Company  CCISEL ;
+Assembly None ;
+Location  ;
+Device   v750c ;
+
+PIN [14..17] = [K0..3];
+PIN [18..21] = [COL0..3];
+PIN 22 = K_val;
+PIN 23 = K_press;
+
+PIN 1 = CLK;
+PIN 2 = K_ack;
+PIN 3 = OE;
+PIN [4..7] = [LN0..3];
+
+PINNODE [32,33] = [C0,C1];
+
+[K0..3].oe = OE;
+
+
+/*Counter*/
+CE = K_scan;
+
+[K0..3].ar = 'b'0;
+[K0..3].sp = 'b'0;
+[K0..3].ck = !CLK;
+
+K0.t = CE;
+K1.t = K0 & CE;
+K2.t = K1 & K0 & CE;
+K3.t = K2 & K1 & K0 & CE;
+
+
+/*Decoder*/
+
+!COL0 = !K2 & !K3;
+!COL1 =  K2 & !K3;
+!COL2 = !K2 & K3;
+!COL3 =  K2 & K3;
+
+/*Mux*/
+K_press = !((!K0 & !K1 & LN0) # (K0 & !K1 & LN1) # (!K0 & K1 & LN2) # (K0 & K1 & LN3));
+
+/*Control*/
+[C0,C1].ar = 'b'0;
+[C0,C1].sp = 'b'0;
+[C0,C1].ck = CLK;
+
+SEQUENCE [C0,C1] {
+
+present 0
+out K_scan;
+if K_press next 1;
+default next 0;
+
+present 1
+out K_val;
+if K_ack next 2;
+default next 1;
+
+present 2:
+if (!K_ack & !K_press) next 2;
+default next 0;
+}
+

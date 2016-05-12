@@ -1,4 +1,4 @@
-Name     SerialControl ;
+Name     SerialControl&Dispatcher ;
 PartNo   02 ;
 Date     30/03/2016 ;
 Revision 01 ;
@@ -8,20 +8,26 @@ Assembly None ;
 Location ISEL ;
 Device   v750c ;
 
-
+/* Input */
 Pin 1 = SCLK;   //From UsbPort
 Pin 2 = SS;     //From UsbPort
-Pin 3 = accept; //From Dispatcher
-Pin 4 = CLK;    //From ATB
+Pin 3 = CLK;    //From ATB
+Pin 4 = D0;     //From BitMemory
+Pin 5 = Fsh;    //From TicketPrinter
 
+/* Output*/
 Pin 14 = wr;    //To BitMemory
-Pin 15 = DXval;  //To Dispatcher
+/*Pin 15 = DXval; //To Dispatcher*/
 Pin 16 = busy;  //To UsbPort
 Pin [18..21] = [Address0..3]; //To BitMemory
+Pin 22 = WrL;
+Pin 23 = WrT;
 
-
-Pin 17 = C0;
-Pin 22 = C1;
+Pinnode 25 = P0;
+Pinnode 26 = P1;
+Pinnode 27 = C0;
+Pinnode 28 = C1;
+Pinnode 29 = P2;
 
 
 
@@ -46,6 +52,8 @@ eq10 = !Address0 & Address1 & !Address2 & Address3;
 
 /*Serial Control */
 /*Establishes bit reception protocol*/
+
+accept = done;
 
 [C0..1].ck = CLK;
 [C0..1].ar = 'b'0;
@@ -73,4 +81,37 @@ Present 3:
 	out DXval, busy;
 	if accept next 0;
 	default next 3;
+}
+
+/*Dispatcher*/
+
+[P0..2].ck = CLK;
+[P0..2].ar = 'b'0;
+[P0..2].sp = 'b'0;
+
+
+Sequence [P0..2]{
+
+Present 0:
+	if !DXval next 0;
+	if D0 next 1;
+	default next 2;
+
+Present 1:
+	out WrL;
+	default next 4;
+
+Present 2:
+	out WrT;
+	if !Fsh next 2;
+	default next 3;
+
+Present 3:
+	if Fsh next 3;
+	default next 4;
+
+Present 4 :
+	out done;
+	if DXval next 4;
+	default next 0;
 }

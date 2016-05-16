@@ -3,28 +3,31 @@
  */
 public class Tui {
 
-
     public int getInt(int current, int max){
         char key = Kbd.getKey();
-        if(key != 'C' && key != 'D')
-            current*= 10;
-            int keyn = key;
-            current+= keyn;
-            current %=100;
-            if(current > max)
-                current = 1;
-
-        else 
-			if(key == 'C'){
-            if(current == max) current = 1;
-            else --current;
-        }
-        else {
-            if (current == 1) current = max;
-            else ++current;
+        switch (key){
+            case '?':
+                if(current == max)
+                    current = 1;
+                else
+                    --current;
+                break;
+            case '?':
+                if (current == 1)
+                    current = max;
+                else
+                    ++current;
+                break;
+            default:
+                if (Character.isDigit(key)){
+                    current*= 10;
+                    current+= Character.getNumericValue(key);
+                    current %=100;
+                    if(current > max)
+                        current = 1;
+                }
+                break;
         }
         return current;
     }
-
-
 }

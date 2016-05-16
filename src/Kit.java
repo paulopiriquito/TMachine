@@ -9,7 +9,7 @@ import isel.leic.utils.*;
 
 public class Kit {
 
-    public static int currentOutput = 0x00;/* Variável de memória dos bits de saída */
+    public static int currentOutput = 0x00;/*Estado actual dos bits de saída */
 
 
     public static void sleep(long milis) {
@@ -23,7 +23,7 @@ public class Kit {
     }
 
 
-    //nega a saida
+    //ínverte a saida
     public static void out(int value){
         currentOutput = value;
         UsbPort.out(~value);
@@ -33,18 +33,18 @@ public class Kit {
 
 
     public static void init(){
-        out(0x00);
+        out(0);
     }
 
 
-    // retorna true se o bit tiver valor logico '1'
+    // retorna true se o bit for '1'
     public static boolean isBit(int mask){
         int a = in() & mask;
         return a != 0;
     }
 
 
-    // retorna os valores dos bits representados por mask presentes no UsbPort
+    // retorna o valor dos bits representados por mask presentes no porto de input do UsbPort
     public static int readBits(int mask){
         return in() & mask;
 

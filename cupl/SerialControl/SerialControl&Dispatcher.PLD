@@ -1,4 +1,4 @@
-Name     SerialControl ;
+Name     SerialControl&Dispatcher ;
 PartNo   02 ;
 Date     30/03/2016 ;
 Revision 01 ;
@@ -12,21 +12,21 @@ Device   v750c ;
 Pin 1 = SCLK;   //From UsbPort
 Pin 2 = SS;     //From UsbPort
 Pin 3 = CLK;    //From ATB
-Pin 4 = D0;
-Pin 5 = Fn;
+Pin 4 = D0;     //From BitMemory
+Pin 5 = Fsh;    //From TicketPrinter
 
 /* Output*/
 Pin 14 = wr;    //To BitMemory
-Pin 15 = DXval;  //To Dispatcher
+/*Pin 15 = DXval; //To Dispatcher*/
 Pin 16 = busy;  //To UsbPort
 Pin [18..21] = [Address0..3]; //To BitMemory
 Pin 22 = WrL;
 Pin 23 = WrT;
 
-Pinnode 25 = C0;
-Pinnode 26 = C1;
-Pinnode 27 = P0;
-Pinnode 28 = P1;
+Pinnode 25 = P0;
+Pinnode 26 = P1;
+Pinnode 27 = C0;
+Pinnode 28 = C1;
 Pinnode 29 = P2;
 
 
@@ -103,11 +103,11 @@ Present 1:
 
 Present 2:
 	out WrT;
-	if !Fn next 2;
+	if !Fsh next 2;
 	default next 3;
 
 Present 3:
-	if Fn next 3;
+	if Fsh next 3;
 	default next 4;
 
 Present 4 :

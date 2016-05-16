@@ -10,7 +10,7 @@ public class TicketPrinter {
     }
 
     /**
-     * Envia comando para imprimir e dispensar um bilhete para a estação toId, roundTrip a true se
+     * Envia comando para imprimir e dispensar um bilhete para a estaÃ§Ã£o toId, roundTrip a true se
      * o bilhete for de ida/volta
      */
     public static void print(int toId, boolean roundTrip){

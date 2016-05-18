@@ -1,0 +1,53 @@
+Name     KeyBuffer ;
+PartNo   00 ;
+Date     18/05/2016 ;
+Revision 01 ;
+Designer Engineer ;
+Company  CCISEL ;
+Assembly None ;
+Location  ;
+Device   v750c ;
+
+PIN [4..7] = [D0..3];
+PIN 1 = CLK;
+PIN  2 = DAV;
+PIN 3 = ACK;
+
+PIN 14 = DAC;
+PIN 15 = Dval;
+PIN 16 = Wreg;
+PIN [17..20] = [Out0..3];
+
+PINNODE[25,26] = [C0,C1];
+
+
+/* Output Register */
+[Out0..3].ar = 'b'0;
+[Out0..3].sp = 'b'0;
+[Out0..3].ck = Wreg;
+
+[Out0..3].d = [D0..3];
+
+/*Buffer control*/
+[C0..1].ar = 'b'0;
+[C0..1].sp = 'b'0;
+[C0..1].ck = CLK;
+
+Sequence[C1,C0]{
+
+present 0:
+	if (DAV & !ACK) next 1;
+	default next 0;
+present 1:
+	out Wreg;
+	if DAV next 2;
+	default next 1;
+present 2:
+	out DAC;
+	if DAV next 2;
+	default next 3;
+present 3:
+	out Dval;
+	if ACK next 0;
+	default next 3;
+} 

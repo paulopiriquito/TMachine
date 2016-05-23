@@ -7,7 +7,7 @@ public class Kbd {
     public static final char NONE = 0;
 
     //Array para relação entre codigo das teclas e o caracter correspondente
-    private static final char[] translate={'0','4','8','A','1','5','9','O','2','6','█','D','3','7','▲','▼'};
+    private static final char[] translate={'0','4','8','A','1','5','9','O','2','6','K','D','3','7','C','B'};
 
     /**
      * Inicia a classe

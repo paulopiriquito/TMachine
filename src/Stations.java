@@ -1,11 +1,31 @@
+import java.util.ArrayList;
+
 /**
  * Created by a3908 on 11/03/2016.
  */
 public class Stations {
-    private static String[] stations = {"Cascais","Estoril","S. João","S.Pedro","Parede","Carcavelos","Oeiras",
-                                        "Santo Amaro", "Paço de Arcos", "Caxias","Cruz-Quebrada","Algés","Belém",
-                                        "Alcântara-Mar", "Santos", "Cais do Sodré"};
+    public static ArrayList<Station> stations;
+    private static int current;
 
 
+    public static void init(int size){
+        stations = new ArrayList<Station>(size);
+    }
 
+    public static void add(int index, int price, String name){
+        stations.add(new Station(index, price, name));
+    }
+
+    public static void addCurrent(int index, int price, String name){
+        current = index;
+        stations.add(new Station(index, price, name));
+    }
+
+    public Station getCurrent(){
+        return stations.get(current);
+    }
+
+    public Station getStation(int index){
+        return stations.get(index);
+    }
 }

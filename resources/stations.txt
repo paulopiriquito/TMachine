@@ -1,0 +1,19 @@
+16
+2 Cascais
+2 Estoril
+2 S. João
+2 S. Pedro
+2 Parede
+1 Carcavelos
+- Oeiras
+1 Santo Amaro
+1 Paço de Arcos
+2 Caxias
+2 Cruz-Quebrada
+2 Algés
+3 Belém
+3 Alcântara-Mar
+3 Santos
+3 Cais do Sodré
+
+

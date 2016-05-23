@@ -1,6 +1,6 @@
 /**
  * Created by a3908 on 11/03/2016.
- */
+
 public class Tui {
 
     public int getInt(int current, int max){
@@ -31,3 +31,4 @@ public class Tui {
         return current;
     }
 }
+ */

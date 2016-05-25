@@ -5,7 +5,7 @@
   {Program "CUPL(WM) Version 5.0a"}
   {DBtype "Schematic"}
   {DBvrev 1.01}
-  {DBtime "Wed May 25 21:25:31 2016 "}
+  {DBtime "Wed May 25 22:57:20 2016 "}
   {DBunit "MIL"}
   {DBgrid 10}
   {Lyrstr "WIRES" 1 "BUS" 1 "GATE" 2 "IEEE" 2 "PINFUN" 3 "PINNUM" 1 
@@ -33,85 +33,53 @@
  {SYMBOL
   {PIN_DEF
    [Ly "PINCON"]
-   {P CLK {Pt "INPUT"}{Lq 0}{Ploc 100 160}}
-   {P DAV {Pt "INPUT"}{Lq 0}{Ploc 100 120}}
-   {P ACK {Pt "INPUT"}{Lq 0}{Ploc 100 100}}
-   {P D0 {Pt "INPUT"}{Lq 0}{Ploc 100 80}}
-   {P D1 {Pt "INPUT"}{Lq 0}{Ploc 100 60}}
-   {P D2 {Pt "INPUT"}{Lq 0}{Ploc 100 40}}
-   {P D3 {Pt "INPUT"}{Lq 0}{Ploc 100 20}}
+   {P CLK {Pt "INPUT"}{Lq 0}{Ploc 100 80}}
+   {P DAV {Pt "INPUT"}{Lq 0}{Ploc 100 40}}
+   {P ACK {Pt "INPUT"}{Lq 0}{Ploc 100 20}}
    {P DAC {Pt "I/O"}{Lq 0}{Ploc 280 20}}
    {P DVAL {Pt "I/O"}{Lq 0}{Ploc 280 40}}
    {P WREG {Pt "I/O"}{Lq 0}{Ploc 280 60}}
-   {P OUT0 {Pt "OUTPUT"}{Lq 0}{Ploc 280 80}}
-   {P OUT1 {Pt "OUTPUT"}{Lq 0}{Ploc 280 100}}
-   {P OUT2 {Pt "OUTPUT"}{Lq 0}{Ploc 280 120}}
-   {P OUT3 {Pt "OUTPUT"}{Lq 0}{Ploc 280 140}}
   }
 
   {PKG
    [Ly "REFDES"]
    [Ts 25][Tj "CB"][Tr 0][Tm "N"]
-   {Rdl 190 190}
+   {Rdl 190 110}
 
    [Ly "PINNUM"]
    [Ts 15][Tj "RC"]
-   {Pnl 120 170}
-   [Ts 15][Tj "RC"]
-   {Pnl 120 130}
-   {Pnl 120 110}
    {Pnl 120 90}
-   {Pnl 120 70}
+   [Ts 15][Tj "RC"]
    {Pnl 120 50}
    {Pnl 120 30}
    [Ts 15][Tj "LC"]
    {Pnl 260 30}
    {Pnl 260 50}
    {Pnl 260 70}
-   {Pnl 260 90}
-   {Pnl 260 110}
-   {Pnl 260 130}
-   {Pnl 260 150}
 
-   {Sd A 1 2 3 4 5 6 7 14 15 16 17 18 19 20}
+   {Sd A 1 2 3 14 15 16}
   }
 
   {PIC
    [Ly "GATE"]
    [Ts 15][Tj "LC"][Tr 0][Tm "N"]
-   {R 130 180 250 0}
-   {L 130 160 100 160}
-   {L 130 170 140 160 130 150}
-   {L 130 120 100 120}
-   {L 130 100 100 100}
+   {R 130 100 250 0}
    {L 130 80 100 80}
-   {L 130 60 100 60}
+   {L 130 90 140 80 130 70}
    {L 130 40 100 40}
    {L 130 20 100 20}
    {L 250 20 280 20}
    {L 250 40 280 40}
    {L 250 60 280 60}
-   {L 250 80 280 80}
-   {L 250 100 280 100}
-   {L 250 120 280 120}
-   {L 250 140 280 140}
    [Ly "PINNAM"]
    [Tj "LC"]
-   {T "CLK" 140 160}
-   {T "DAV" 140 120}
-   {T "ACK" 140 100}
-   {T "D0" 140 80}
-   {T "D1" 140 60}
-   {T "D2" 140 40}
-   {T "D3" 140 20}
+   {T "CLK" 140 80}
+   {T "DAV" 140 40}
+   {T "ACK" 140 20}
    [Tj "RC"]
    {T "DAC" 240 20}
    {T "DVAL" 240 40}
    {T "WREG" 240 60}
-   {T "OUT0" 240 80}
-   {T "OUT1" 240 100}
-   {T "OUT2" 240 120}
-   {T "OUT3" 240 140}
    [Ly "DEVICE"]
    [Tj "CT"]
    {T "V750C" 190 -10}
@@ -125,7 +93,7 @@
    {EX
     [Ly "ATTR2"]
     [Ts 12][Tj "CT"][Tr 0][Tm "N"]
-    {At PLD C:\USERS\JOÃOPAULODACOSTAFRAN\DROPBOX\ENGENHARIA\ISEL\LIC\TRABALHOS\TMACHINE\CUPL\KEYBUFFER\KEYBUFFER 190 180}
+    {At PLD C:\USERS\JOÃOPAULODACOSTAFRAN\DROPBOX\ENGENHARIA\ISEL\LIC\TRABALHOS\TMACHINE\CUPL\KEYBUFFER\KEYBUFFER 190 100}
    }
   }
  }
@@ -141,27 +109,11 @@
    }
    {N ACK
    }
-   {N D0
-   }
-   {N D1
-   }
-   {N D2
-   }
-   {N D3
-   }
    {N DAC
    }
    {N DVAL
    }
    {N WREG
-   }
-   {N OUT0
-   }
-   {N OUT1
-   }
-   {N OUT2
-   }
-   {N OUT3
    }
   }
 

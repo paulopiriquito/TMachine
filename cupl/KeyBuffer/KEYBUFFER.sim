@@ -3,17 +3,9 @@ PIN   3 =  ACK
 PIN  25 =  C0 
 PIN  26 =  C1 
 PIN   1 =  CLK 
-PIN   4 =  D0 
-PIN   5 =  D1 
-PIN   6 =  D2 
-PIN   7 =  D3 
 PIN  14 =  DAC 
 PIN   2 =  DAV 
 PIN  15 =  Dval 
-PIN  17 =  Out0 
-PIN  18 =  Out1 
-PIN  19 =  Out2 
-PIN  20 =  Out3 
 PIN  16 =  Wreg 
 %END
 
@@ -32,7 +24,7 @@ C0.ar  =>
 C0.ck  =>
     CLK
 
-C0.sp C1.sp Out0.sp Out1.sp Out2.sp Out3.sp  =>
+C0.sp C1.sp  =>
     0 
 
 C1.d  =>
@@ -54,50 +46,6 @@ DAC =>
 Dval =>
     C0 & C1
 
-Out0.d  =>
-    D0
-
-Out0.ar  =>
-    0 
-
-Out0.ck  =>
-    Wreg
-
-Out0.sp  =>
-    
-Out1.d  =>
-    D1
-
-Out1.ar  =>
-    0 
-
-Out1.ck  =>
-    Wreg
-
-Out1.sp  =>
-    
-Out2.d  =>
-    D2
-
-Out2.ar  =>
-    0 
-
-Out2.ck  =>
-    Wreg
-
-Out2.sp  =>
-    
-Out3.d  =>
-    D3
-
-Out3.ar  =>
-    0 
-
-Out3.ck  =>
-    Wreg
-
-Out3.sp  =>
-    
 Wreg =>
     C0 & !C1
 
@@ -105,18 +53,6 @@ DAC.oe  =>
     1 
 
 Dval.oe  =>
-    1 
-
-Out0.oe  =>
-    1 
-
-Out1.oe  =>
-    1 
-
-Out2.oe  =>
-    1 
-
-Out3.oe  =>
     1 
 
 Wreg.oe  =>

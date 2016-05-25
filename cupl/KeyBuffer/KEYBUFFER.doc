@@ -5,7 +5,7 @@
 
 CUPL(WM)        5.0a Serial# 60008009
 Device          v750c  Library DLIB-h-40-2
-Created         Wed May 25 21:25:31 2016
+Created         Wed May 25 22:57:20 2016
 Name            KeyBuffer 
 Partno          00 
 Revision        01 
@@ -53,54 +53,6 @@ DAC =>
 Dval =>
     C0 & C1
 
-Out0.d  =>
-    D0
-
-Out0.ar  =>
-    0 
-
-Out0.ck  =>
-    Wreg
-
-Out0.sp  =>
-    0 
-
-Out1.d  =>
-    D1
-
-Out1.ar  =>
-    0 
-
-Out1.ck  =>
-    Wreg
-
-Out1.sp  =>
-    0 
-
-Out2.d  =>
-    D2
-
-Out2.ar  =>
-    0 
-
-Out2.ck  =>
-    Wreg
-
-Out2.sp  =>
-    0 
-
-Out3.d  =>
-    D3
-
-Out3.ar  =>
-    0 
-
-Out3.ck  =>
-    Wreg
-
-Out3.sp  =>
-    0 
-
 Wreg =>
     C0 & !C1
 
@@ -108,18 +60,6 @@ DAC.oe  =>
     1 
 
 Dval.oe  =>
-    1 
-
-Out0.oe  =>
-    1 
-
-Out1.oe  =>
-    1 
-
-Out2.oe  =>
-    1 
-
-Out3.oe  =>
     1 
 
 Wreg.oe  =>
@@ -146,40 +86,12 @@ Pol   Name              Ext     Pin     Type     Used   Pterms  Level
     C1                  ck      26       M        1       1       1     
     C1                  sp      26       M        1       1       1     
     CLK                         1        V        -       -       -     
-    D0                          4        V        -       -       -     
-    D1                          5        V        -       -       -     
-    D2                          6        V        -       -       -     
-    D3                          7        V        -       -       -     
     DAC                         14       V        1       8       2     
     DAV                         2        V        -       -       -     
     Dval                        15       V        1       10      2     
-    Out0                        17       V        -       -       -     
-    Out0                d       17       X        1       14      2     
-    Out0                ar      17       X        1       1       1     
-    Out0                ck      17       X        1       1       1     
-    Out0                sp      17       X        1       1       1     
-    Out1                        18       V        -       -       -     
-    Out1                d       18       X        1       16      2     
-    Out1                ar      18       X        1       1       1     
-    Out1                ck      18       X        1       1       1     
-    Out1                sp      18       X        1       1       1     
-    Out2                        19       V        -       -       -     
-    Out2                d       19       X        1       16      2     
-    Out2                ar      19       X        1       1       1     
-    Out2                ck      19       X        1       1       1     
-    Out2                sp      19       X        1       1       1     
-    Out3                        20       V        -       -       -     
-    Out3                d       20       X        1       14      2     
-    Out3                ar      20       X        1       1       1     
-    Out3                ck      20       X        1       1       1     
-    Out3                sp      20       X        1       1       1     
     Wreg                        16       V        1       12      2     
     DAC                 oe      14       D        1       1       0     
     Dval                oe      15       D        1       1       0     
-    Out0                oe      17       D        1       1       0     
-    Out1                oe      18       D        1       1       0     
-    Out2                oe      19       D        1       1       0     
-    Out3                oe      20       D        1       1       0     
     Wreg                oe      16       D        1       1       0     
 
 
@@ -244,8 +156,8 @@ Pin #21 Node 32 ,42  14370 Mode  xxx  14403 xxxx
  03528 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
  03612 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
  03696 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
-Pin #20 Node 31 ,41  14373 Mode  xx-  14407 xxxx 
- 03780 -----------------------------------x------------------------------------------------ 
+Pin #20 Node 31 ,41  14373 Mode  xxx  14407 xxxx 
+ 03780 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
  03864 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
  03948 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
  04032 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
@@ -260,12 +172,12 @@ Pin #20 Node 31 ,41  14373 Mode  xx-  14407 xxxx
  04788 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
  04872 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
  04956 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
- 05040 -------------------------x---------------------------------------------------------- 
+ 05040 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
  05124 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
  05208 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
- 05292 ------------------------------------------------------------------------------------ 
-Pin #19 Node 30 ,40  14376 Mode  xx-  14411 xxxx 
- 05376 -------------------------------------------x---------------------------------------- 
+ 05292 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
+Pin #19 Node 30 ,40  14376 Mode  xxx  14411 xxxx 
+ 05376 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
  05460 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
  05544 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
  05628 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
@@ -282,12 +194,12 @@ Pin #19 Node 30 ,40  14376 Mode  xx-  14411 xxxx
  06552 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
  06636 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
  06720 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
- 06804 -------------------------x---------------------------------------------------------- 
+ 06804 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
  06888 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
  06972 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
- 07056 ------------------------------------------------------------------------------------ 
-Pin #18 Node 29 ,39  14379 Mode  xx-  14415 xxxx 
- 07140 ---------------------------------------------------x-------------------------------- 
+ 07056 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
+Pin #18 Node 29 ,39  14379 Mode  xxx  14415 xxxx 
+ 07140 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
  07224 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
  07308 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
  07392 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
@@ -304,12 +216,12 @@ Pin #18 Node 29 ,39  14379 Mode  xx-  14415 xxxx
  08316 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
  08400 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
  08484 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
- 08568 -------------------------x---------------------------------------------------------- 
+ 08568 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
  08652 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
  08736 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
- 08820 ------------------------------------------------------------------------------------ 
-Pin #17 Node 28 ,38  14382 Mode  xx-  14419 xxxx 
- 08904 -----------------------------------------------------------x------------------------ 
+ 08820 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
+Pin #17 Node 28 ,38  14382 Mode  xxx  14419 xxxx 
+ 08904 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
  08988 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
  09072 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
  09156 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
@@ -324,10 +236,10 @@ Pin #17 Node 28 ,38  14382 Mode  xx-  14419 xxxx
  09912 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
  09996 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
  10080 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
- 10164 -------------------------x---------------------------------------------------------- 
+ 10164 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
  10248 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
  10332 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
- 10416 ------------------------------------------------------------------------------------ 
+ 10416 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
 Pin #16 Node 27 ,37  14385 Mode  -x-  14423 xxxx 
  10500 ----x--------x---------------------------------------------------------------------- 
  10584 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
@@ -390,11 +302,11 @@ LEGEND    X : fuse not blown
                       CLK x---|1           24|---x Vcc                      
                       DAV x---|2           23|---x                          
                       ACK x---|3           22|---x                          
-                       D0 x---|4           21|---x                          
-                       D1 x---|5           20|---x Out3                     
-                       D2 x---|6           19|---x Out2                     
-                       D3 x---|7           18|---x Out1                     
-                          x---|8           17|---x Out0                     
+                          x---|4           21|---x                          
+                          x---|5           20|---x                          
+                          x---|6           19|---x                          
+                          x---|7           18|---x                          
+                          x---|8           17|---x                          
                           x---|9           16|---x Wreg                     
                           x---|10          15|---x Dval                     
                           x---|11          14|---x DAC                      

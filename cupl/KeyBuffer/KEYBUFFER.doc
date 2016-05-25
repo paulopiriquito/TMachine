@@ -5,7 +5,7 @@
 
 CUPL(WM)        5.0a Serial# 60008009
 Device          v750c  Library DLIB-h-40-2
-Created         Wed May 18 21:52:18 2016
+Created         Wed May 25 21:25:31 2016
 Name            KeyBuffer 
 Partno          00 
 Revision        01 
@@ -22,7 +22,6 @@ Location
 C0.d  =>
     !ACK & C0 & C1
   # !C0 & C1 & !DAV
-  # C0 & !C1 & !DAV
   # !ACK & !C0 & !C1 & DAV
 
 C0.ar  =>
@@ -35,9 +34,9 @@ C0.sp  =>
     0 
 
 C1.d  =>
-    !ACK & C1
+    !ACK & C0
   # !C0 & C1
-  # C0 & !C1 & DAV
+  # C0 & !C1
 
 C1.ar  =>
     0 
@@ -137,7 +136,7 @@ Pol   Name              Ext     Pin     Type     Used   Pterms  Level
 
     ACK                         3        V        -       -       -     
     C0                          25       N        -       -       -     
-    C0                  d       25       M        4       4       2     
+    C0                  d       25       M        3       4       2     
     C0                  ar      25       M        1       1       1     
     C0                  ck      25       M        1       1       1     
     C0                  sp      25       M        1       1       1     
@@ -353,9 +352,9 @@ Pin #15 Node 26 ,36  14388 Mode  ---  14427 xxxx
  12096 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
  12180 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
  12264 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
- 12348 ------------x-----------------------------------------------------x----------------- 
+ 12348 ----x-------------------------------------------------------------x----------------- 
  12432 -----x------x----------------------------------------------------------------------- 
- 12516 ----x--------x-------------------------------------------------------------x-------- 
+ 12516 ----x--------x---------------------------------------------------------------------- 
  12600 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
  12684 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
  12768 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
@@ -370,8 +369,8 @@ Pin #14 Node 25 ,35  14391 Mode  ---  14431 xxxx
  13440 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
  13524 ----x-------x-----------------------------------------------------x----------------- 
  13608 -----x------x-------------------------------------------------------------x--------- 
- 13692 ----x--------x------------------------------------------------------------x--------- 
- 13776 -----x-------x----------------------------------------------------x--------x-------- 
+ 13692 -----x-------x----------------------------------------------------x--------x-------- 
+ 13776 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
  13860 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
  13944 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
  14028 -----------------------------------------------------------------------------------x 

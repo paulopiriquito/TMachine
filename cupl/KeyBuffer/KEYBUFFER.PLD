@@ -40,8 +40,7 @@ present 0:
 	default next 0;
 present 1:
 	out Wreg;
-	if DAV next 2;
-	default next 1;
+	default next 2;
 present 2:
 	out DAC;
 	if DAV next 2;

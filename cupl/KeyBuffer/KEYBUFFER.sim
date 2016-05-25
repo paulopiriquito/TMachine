@@ -24,7 +24,6 @@ PIN  16 =  Wreg
 C0.d  =>
     !ACK & C0 & C1
   # !C0 & C1 & !DAV
-  # C0 & !C1 & !DAV
   # !ACK & !C0 & !C1 & DAV
 
 C0.ar  =>
@@ -37,9 +36,9 @@ C0.sp C1.sp Out0.sp Out1.sp Out2.sp Out3.sp  =>
     0 
 
 C1.d  =>
-    !ACK & C1
+    !ACK & C0
   # !C0 & C1
-  # C0 & !C1 & DAV
+  # C0 & !C1
 
 C1.ar  =>
     0 

@@ -17,6 +17,7 @@ PIN 1 = CLK;
 PIN 2 = K_ack;
 PIN 3 = OE;
 PIN [4..7] = [LN0..3];
+PIN 8 = CLKA;
 
 PINNODE [32,33] = [C0,C1];
 
@@ -28,7 +29,7 @@ CE = K_scan;
 
 [K0..3].ar = 'b'0;
 [K0..3].sp = 'b'0;
-[K0..3].ck = !CLK;
+[K0..3].ck = CLK;
 
 K0.t = CE;
 K1.t = K0 & CE;
@@ -49,9 +50,9 @@ K_press = !((!K0 & !K1 & LN0) # (K0 & !K1 & LN1) # (!K0 & K1 & LN2) # (K0 & K1 &
 /*Control*/
 [C0,C1].ar = 'b'0;
 [C0,C1].sp = 'b'0;
-[C0,C1].ck = CLK;
+[C0,C1].ck = CLKA;
 
-SEQUENCE [C0,C1] {
+SEQUENCE [C1,C0] {
 
 present 0
 out K_scan;
@@ -64,7 +65,7 @@ if K_ack next 2;
 default next 1;
 
 present 2:
-if (!K_ack & !K_press) next 2;
-default next 0;
+if (!K_ack & !K_press) next 0;
+default next 2;
 }
 

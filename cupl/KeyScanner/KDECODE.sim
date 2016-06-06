@@ -1,0 +1,155 @@
+%SIGNAL
+PIN  32 =  C0 
+PIN  33 =  C1 
+PIN   1 =  CLK 
+PIN   8 =  CLKA 
+PIN  18 =  COL0 
+PIN  19 =  COL1 
+PIN  20 =  COL2 
+PIN  21 =  COL3 
+PIN  14 =  K0 
+PIN  15 =  K1 
+PIN  16 =  K2 
+PIN  17 =  K3 
+PIN   2 =  K_ack 
+PIN  23 =  K_press 
+PIN  22 =  K_val 
+PIN   4 =  LN0 
+PIN   5 =  LN1 
+PIN   6 =  LN2 
+PIN   7 =  LN3 
+PIN   3 =  OE 
+%END
+
+%FIELD
+%END
+
+%EQUATION
+C0.d  =>
+    C0 & !C1 & !K_ack
+  # !C0 & !C1 & K_press
+
+C0.ar  =>
+    0 
+
+C0.ck  =>
+    CLKA
+
+C0.sp C1.sp K0.sp K1.sp K2.sp K3.sp  =>
+    0 
+
+C1.d  =>
+    !C0 & C1 & K_ack
+  # C0 & !C1 & K_ack
+  # !C0 & C1 & K_press
+
+C1.ar  =>
+    0 
+
+C1.ck  =>
+    CLKA
+
+C1.sp  =>
+    
+CE =>
+    !C0 & !C1
+
+!COL0 =>
+    !K2 & !K3
+
+!COL1 =>
+    K2 & !K3
+
+!COL2 =>
+    !K2 & K3
+
+!COL3 =>
+    K2 & K3
+
+K0.t  =>
+    !C0 & !C1
+
+K0.ar  =>
+    0 
+
+K0.ck  =>
+    CLK
+
+K0.oe  =>
+    OE
+
+K0.sp  =>
+    
+K1.t  =>
+    !C0 & !C1 & K0
+
+K1.ar  =>
+    0 
+
+K1.ck  =>
+    CLK
+
+K1.oe  =>
+    OE
+
+K1.sp  =>
+    
+K2.t  =>
+    !C0 & !C1 & K0 & K1
+
+K2.ar  =>
+    0 
+
+K2.ck  =>
+    CLK
+
+K2.oe  =>
+    OE
+
+K2.sp  =>
+    
+K3.t  =>
+    !C0 & !C1 & K0 & K1 & K2
+
+K3.ar  =>
+    0 
+
+K3.ck  =>
+    CLK
+
+K3.oe  =>
+    OE
+
+K3.sp  =>
+    
+K_press =>
+    !K0 & !K1 & LN0
+  # K0 & !K1 & LN1
+  # !K0 & K1 & LN2
+  # K0 & K1 & LN3
+
+K_scan =>
+    !C0 & !C1
+
+K_val =>
+    C0 & !C1
+
+COL0.oe  =>
+    1 
+
+COL1.oe  =>
+    1 
+
+COL2.oe  =>
+    1 
+
+COL3.oe  =>
+    1 
+
+K_press.oe  =>
+    1 
+
+K_val.oe  =>
+    1 
+
+%END

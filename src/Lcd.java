@@ -61,7 +61,6 @@ public class Lcd {
 
     /**
      * Escreve uma string na posição atual do cursor
-     * @param txt String a escrever
      */
     public static void write(String txt){
         for (int i = 0; i < txt.length(); i++) {

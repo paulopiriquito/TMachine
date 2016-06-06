@@ -2,8 +2,10 @@
  * Created by Nuno Conceiçao on 14/03/2016.
  */
 
-import isel.leic.usbio.*;
+
+
 import isel.leic.utils.*;
+import isel.leic.UsbPort;
 
 
 

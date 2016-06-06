@@ -5,36 +5,44 @@ import java.io.IOException;
 import java.util.Scanner;
 
 /**
- * Created by JoãopaulodacostaFran on 16/05/2016.
+ * Created by Joï¿½opaulodacostaFran on 16/05/2016.
  */
 public class FileAccess {
+    public static int size;
+    public static int local;
 
     public static void read(String fileName){
         try{
             Scanner file = new Scanner(new BufferedReader(new FileReader(fileName)));
-            int size = file.nextInt();
+            size = file.nextInt();
             Stations.init(size);
 
             for (int i = 0; i < size; i++) {
                 int price = 0;
 
-                if (file.hasNext("-"))
+                if (file.hasNext("-")){
+                    local = i + 1;
                     file.next("-");
-                else
+                }
+                else{
                     price = file.nextInt();
-                String name = file.nextLine();
-                Stations.add(i, price, name);
+                    String name = file.nextLine();
+                    Stations.add(i, price, name);
+                }
+
             }
         }
         catch (IOException e){
-            System.out.println("Erro na leitura das estações");
+            System.out.println("Erro na leitura das estaï¿½ï¿½es");
         }
     }
 
     public static void main(String[] args) {
+        Stations station = new Stations();
         read("resources/stations.txt");
         for (Station e : Stations.stations){
             System.out.println(e.getCoinsAmout() + e.getName());
         }
+        System.out.println(station.stationName(3));
     }
 }

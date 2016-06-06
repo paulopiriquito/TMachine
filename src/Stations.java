@@ -28,4 +28,10 @@ public class Stations {
     public Station getStation(int index){
         return stations.get(index);
     }
+
+    public static String stationName(int current){return Stations.stations.get(current).getName();}
+
+    public int getStationNumber(){return Stations.stations.indexOf(current) +1;}
+
+
 }

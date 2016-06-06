@@ -9,7 +9,8 @@ public class Pin {
     public static final int
             K_DATA = 0x0f, // |****||++++|
             K_VAL = 0x10, //  |***+||****|
-            BUSY = 0x20 //    |**+*||****|
+            BUSY = 0x20, //   |**+*||****|
+            MSWITCH = 0x80
     ;
 
     /**
@@ -17,9 +18,9 @@ public class Pin {
      */
     public static final int
             K_ACK = 0x01, //  |****||***+|
-            K_OE = 0x10, //   |***+||****|
             SCLK = 0x02, //   |****||**+*|
             SDX = 0x04,   //  |****||*+**|
-            IOSsel = 0x08 //  |****||+***|
+            IOSsel = 0x08, // |****||+***|
+            K_OE = 0x20  //   |***+||****|
     ;
 }

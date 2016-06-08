@@ -7,6 +7,7 @@
  */
 public class Lcd {
     private static final int LINES = 2, COLS = 16; //Dimensão do display
+    //private static int mainCursor = 1, mainLine = 1;
 
     /**
      * Envia a sequência de inicio do LCD
@@ -19,7 +20,7 @@ public class Lcd {
         writeCMD(0b00111000);
         writeCMD(0b00001000);
         writeCMD(0b00000001);
-        writeCMD(0b00000111);
+        writeCMD(0b00000110);
         writeCMD(0b00001111);
     }
 
@@ -59,6 +60,34 @@ public class Lcd {
         writeDATA(c);
     }
 
+    public static void setCursor(int line, int col){
+        returnHome();
+        int shift;
+
+        if (line == 1)
+            shift = col;
+        else
+            shift = (col)+40;
+
+        moveCursor(shift);
+    }
+
+    public static void returnHome(){
+        writeCMD(0b00000010);
+    }
+
+    public static void moveCursor(int shift){
+        for (int i = 0; i < shift; i++) {
+            writeCMD(0b00010100);
+        }
+    }
+
+    public static void shiftCursor(int shift){
+        for (int i = 0; i < shift; i++) {
+            writeCMD(0b00011100);
+        }
+    }
+
     /**
      * Escreve uma string na posição atual do cursor
      */
@@ -68,9 +97,26 @@ public class Lcd {
         }
     }
 
+    public static void writeHeader(String header){
+        int position = (COLS/2) - (header.length()/2);
+        int i = 1;
+        for (; i < position; i++) {
+            write(' ');
+        }
+        for (int j = 0; j < header.length(); ++i, ++j){
+            write(header.charAt(j));
+        }
+        for (; i < COLS; ++i){
+            write(' ');
+        }
+    }
+
+    //public static void writePrice()
+
     public static void main(String[] args) {
         init();
-        write("LIC");
+        writeHeader("Oeiras");
+        setCursor(2, 4);
     }
 
 }

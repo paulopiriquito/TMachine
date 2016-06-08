@@ -30,15 +30,19 @@ public class SerialEmitter {
             Kit.clrBits((Pin.SDX));
         frame >>= 1;
 
+        Kit.setBits(Pin.SCLK);
+
+
         for (int i = 1; i < size; i++) {
-            Kit.setBits(Pin.SCLK);
             if(frame%2 == 1) //Set do próximo bit
                 Kit.setBits(Pin.SDX);
             else
                 Kit.clrBits((Pin.SDX));
             frame >>= 1;
             Kit.clrBits((Pin.SCLK));
+            Kit.setBits((Pin.SCLK));
         }
+        Kit.clrBits((Pin.SCLK));
         Kit.setBits(Pin.IOSsel); //Desliga a recepção do IOS
     }
 

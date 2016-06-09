@@ -20,4 +20,6 @@ public class CoinDeposit {
     public static void removeCoin(){
         --coinCounter;
     }
+
+
 }

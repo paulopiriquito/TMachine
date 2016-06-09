@@ -24,10 +24,8 @@ public class Kbd {
     public static char getKey(){
         char key = NONE;
         if(Kit.isBit(Pin.K_VAL)){  //Se houver tecla premida
-            Kit.setBits(Pin.K_OE);
             key = translate[Kit.readBits(Pin.K_DATA)];
             Kit.setBits(Pin.K_ACK);
-            Kit.clrBits(Pin.K_OE);
             while (Kit.isBit(Pin.K_VAL))  //Espera que o Key Decode retire o K_val
                 ;
             Kit.clrBits(Pin.K_ACK);

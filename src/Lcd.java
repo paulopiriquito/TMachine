@@ -7,7 +7,6 @@
  */
 public class Lcd {
     private static final int LINES = 2, COLS = 16; //Dimensão do display
-    //private static int mainCursor = 1, mainLine = 1;
 
     /**
      * Envia a sequência de inicio do LCD
@@ -23,6 +22,84 @@ public class Lcd {
         writeCMD(0b00000110);
         writeCMD(0b00001111);
     }
+
+    public static void setCursor(int line, int col){
+        if (line > LINES || col > COLS)
+            throw new IndexOutOfBoundsException();
+        if (line == 2)
+            col += 64;
+        moveCursor(col);
+    }
+
+    /**
+     * Escreve um caracter na posição atual do cursor
+     * @param c Caracter a escrever
+     */
+    public static void write(char c){
+        writeDATA(c);
+    }
+
+    /**
+     * Escreve uma string na posição atual do cursor
+     */
+    public static void write(String txt){
+        for (int i = 0; i < txt.length(); i++) {
+            write(txt.charAt(i));
+        }
+    }
+
+    public static void writeHeader(String header){
+        returnHome();
+        int position = (COLS/2) - (header.length()/2);
+        int i = 1;
+        for (; i < position; i++) //Fill before
+            write(' ');
+        for (int j = 0; j < header.length(); ++i, ++j) //Write text
+            write(header.charAt(j));
+        for (; i < COLS; ++i) //Fill after
+            write(' ');
+    }
+
+    public static void writeFloor(String floor){
+        setCursor(LINES,0);
+        int position = (COLS/2) - (floor.length()/2);
+        int i = 1;
+        for (; i < position; i++) //Fill before
+            write(' ');
+        for (int j = 0; j < floor.length(); ++i, ++j) //Write text
+            write(floor.charAt(j));
+        for (; i < COLS; ++i) //Fill after
+            write(' ');
+    }
+
+    public static void writePrice(int eur, int cents){
+        setCursor(2,COLS-3);
+        write(String.format("%d$%02d", eur, cents));
+        setCursor(LINES,COLS-2);
+    }
+
+    public static void writeSign(boolean returning){
+        setCursor(LINES,1);
+        if (returning)
+            write("<->");
+        else
+            write(" ->");
+    }
+
+    public static void writeStationNumber(int number){
+        setCursor(LINES,(COLS/2)-1);
+        write(String.format("%02d", number));
+        setCursor(LINES,(COLS/2));
+    }
+
+    public static void writePayment(int eur, int cents){
+        setCursor(LINES,1);
+        write("Pagamento");
+        writePrice(eur, cents);
+    }
+
+
+
 
     /**
      * Escreve um comando/dados no LCD
@@ -52,71 +129,21 @@ public class Lcd {
         writeByte(true, data);
     }
 
-    /**
-     * Escreve um caracter na posição atual do cursor
-     * @param c Caracter a escrever
-     */
-    public static void write(char c){
-        writeDATA(c);
-    }
-
-    public static void setCursor(int line, int col){
-        returnHome();
-        int shift;
-
-        if (line == 1)
-            shift = col;
-        else
-            shift = (col)+40;
-
-        moveCursor(shift);
-    }
-
-    public static void returnHome(){
+    private static void returnHome(){
         writeCMD(0b00000010);
     }
 
-    public static void moveCursor(int shift){
-        for (int i = 0; i < shift; i++) {
-            writeCMD(0b00010100);
-        }
+    private static void moveCursor(int shift){
+        writeCMD(128 | (shift-1));
     }
 
-    public static void shiftCursor(int shift){
-        for (int i = 0; i < shift; i++) {
-            writeCMD(0b00011100);
-        }
-    }
-
-    /**
-     * Escreve uma string na posição atual do cursor
-     */
-    public static void write(String txt){
-        for (int i = 0; i < txt.length(); i++) {
-            write(txt.charAt(i));
-        }
-    }
-
-    public static void writeHeader(String header){
-        int position = (COLS/2) - (header.length()/2);
-        int i = 1;
-        for (; i < position; i++) {
-            write(' ');
-        }
-        for (int j = 0; j < header.length(); ++i, ++j){
-            write(header.charAt(j));
-        }
-        for (; i < COLS; ++i){
-            write(' ');
-        }
-    }
-
-    //public static void writePrice()
 
     public static void main(String[] args) {
         init();
-        writeHeader("Oeiras");
-        setCursor(2, 4);
+        writeHeader("Estacao");
+        writeSign(true);
+        writePrice(0,00);
+        writeStationNumber(0);
     }
 
 }

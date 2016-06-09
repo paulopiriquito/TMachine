@@ -1,6 +1,6 @@
 
 /**
- * Created by JoãopaulodacostaFran on 30/05/2016.
+ * Created by JoopaulodacostaFran on 30/05/2016.
  */
 public class TicketPrinterApp extends Tui {
 

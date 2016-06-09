@@ -1,5 +1,5 @@
 /**
- * Created by JoãopaulodacostaFran on 23/05/2016.
+ * Created by JoaopaulodacostaFran on 23/05/2016.
  */
 public class Station {
     private int index, price;

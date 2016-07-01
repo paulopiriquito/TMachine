@@ -3,11 +3,10 @@
  */
 
 public class Tui {
-    String localStation = Stations.stationName(FileAccess.local);
-    String welcome = localStation + "bem vindo";
+    //protected static String localStation = Stations.getLocalStation();
+    protected static boolean doubleTicket = false;
 
-    public int getInt(int current, int max) {
-        char key = Kbd.getKey();
+    protected static int readStationNumber(int current, int max, char key) {
         switch (key) {
             case 'B':
                 if (current == max)
@@ -21,14 +20,6 @@ public class Tui {
                 else
                     --current;
                 break;
-            //  case 'A':
-            //    Lcd.write(welcome);
-            //    break;
-            //  case 'O':
-            //     Lcd.write(Stations.stationName(current) + "/n ->   " + current + Stations.stations.get(current).getReturnPrice() );
-            //     break;
-            // case 'k':
-
             default:
                 if (Character.isDigit(key)) {
                     current *= 10;
@@ -37,11 +28,70 @@ public class Tui {
                     if (current > max)
                         current = 1;
                 }
-                break;
+                return current;
         }
+        writeStationNumber(current);
         return current;
-         }
     }
+
+    protected boolean readDoubleTicket(char key){
+        if(key == 'O') {
+            doubleTicket = !doubleTicket;
+            writeSign(doubleTicket);
+        }
+        return doubleTicket;
+    }
+
+    protected static void writeHeader(String header){
+        Lcd.returnHome();
+        int position = (Lcd.COLS/2) - (header.length()/2);
+        int i = 1;
+        for (; i < position; i++) //Fill before
+            Lcd.write(' ');
+        for (int j = 0; j < header.length(); ++i, ++j) //Write text
+            Lcd.write(header.charAt(j));
+        for (; i < Lcd.COLS; ++i) //Fill after
+            Lcd.write(' ');
+    }
+
+    protected static void writeFloor(String floor){
+        Lcd.setCursor(Lcd.LINES,0);
+        int position = (Lcd.COLS/2) - (floor.length()/2);
+        int i = 1;
+        for (; i < position; i++) //Fill before
+            Lcd.write(' ');
+        for (int j = 0; j < floor.length(); ++i, ++j) //Write text
+            Lcd.write(floor.charAt(j));
+        for (; i < Lcd.COLS; ++i) //Fill after
+            Lcd.write(' ');
+    }
+
+    protected static void writeSign(boolean returning){
+        Lcd.setCursor(Lcd.LINES,1);
+        if (returning)
+            Lcd.write("<->");
+        else
+            Lcd.write(" ->");
+    }
+
+    protected static void writeStationNumber(int number){
+        Lcd.setCursor(Lcd.LINES,(Lcd.COLS/2)-1);
+        Lcd.write(String.format("%02d", number));
+        Lcd.setCursor(Lcd.LINES,(Lcd.COLS/2));
+    }
+
+    protected static void writePrice(int eur, int cents){
+        Lcd.setCursor(2,Lcd.COLS-3);
+        Lcd.write(String.format("%d$%02d", eur, cents));
+        Lcd.setCursor(Lcd.LINES,Lcd.COLS-2);
+    }
+
+    protected static void writePayment(int eur, int cents){
+        Lcd.setCursor(Lcd.LINES,1);
+        Lcd.write("Pagamento");
+        writePrice(eur, cents);
+    }
+}
 
 
 

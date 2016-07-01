@@ -33,7 +33,7 @@ public class FileAccess {
             }
         }
         catch (IOException e){
-            System.out.println("Erro na leitura das esta��es");
+            System.out.println("Error reading stations");
         }
     }
 

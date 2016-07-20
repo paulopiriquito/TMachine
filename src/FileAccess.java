@@ -1,32 +1,31 @@
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.*;
 import java.util.Scanner;
 
 /**
  * Created by Jo�opaulodacostaFran on 16/05/2016.
  */
 public class FileAccess {
-    public static int size;
-    public static int local;
+    public static final String REGISTER = "resources/register.txt";
+    public static final String STATIONS = "resources/stations.txt";
+    public static int maxStations;
 
-    public static void read(String fileName){
+    public static void loadStations(String fileName){
         try{
             Scanner file = new Scanner(new BufferedReader(new FileReader(fileName)));
-            size = file.nextInt();
-            Stations.init(size);
+            maxStations = file.nextInt();
+            Stations.init(maxStations);
 
-            for (int i = 0; i < size; i++) {
+            for (int i = 0; i < maxStations; i++) {
                 int price = 0;
 
                 if (file.hasNext("-")){
-                    local = i + 1;
                     file.next("-");
+                    String name = file.nextLine().replaceFirst(" ","");
+                    Stations.addHome(i, name);
                 }
                 else{
                     price = file.nextInt();
-                    String name = file.nextLine();
+                    String name = file.nextLine().replaceFirst(" ","");
                     Stations.add(i, price, name);
                 }
 
@@ -37,12 +36,41 @@ public class FileAccess {
         }
     }
 
-    public static void main(String[] args) {
-        Stations station = new Stations();
-        read("resources/stations.txt");
-        for (Station e : Stations.stations){
-            System.out.println(e.getCoinsAmout() + e.getName());
+    public static int loadCoins(String filename){
+        try {
+            BufferedReader br = new BufferedReader(new FileReader(filename));
+            return Integer.valueOf(br.readLine().split(";")[0]);
         }
-        System.out.println(station.stationName(3));
+        catch(Exception e){
+            return 0;
+        }
+    }
+
+    public static int loadTickets(String filename){
+        try {
+            BufferedReader br = new BufferedReader(new FileReader(filename));
+            return Integer.valueOf(br.readLine().split(";")[1]);
+        }
+        catch(Exception e){
+            return 0;
+        }
+    }
+
+    public static void saveReg(String filename, int ticketCount, int coinDeposit){
+        try{
+            FileWriter fw = new FileWriter(filename, false);
+            fw.write(ticketCount + ";" + coinDeposit);
+        }
+        catch (IOException e){
+            System.out.println("Error saving register");
+        }
+    }
+
+
+
+    public static void main(String[] args) {
+        loadStations("resources/stations.txt");
+        for (Station e : Stations.stations)
+            System.out.println(e.getPrice() + " " + e.getName());
     }
 }

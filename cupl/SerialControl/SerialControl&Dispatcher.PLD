@@ -50,7 +50,7 @@ Address3.t = Address2 & Address1 & Address0 & enable ;
 
 eq10 = !Address0 & Address1 & !Address2 & Address3;
 
-/*Serial Control */
+/*Serial App */
 /*Establishes bit reception protocol*/
 
 accept = done;

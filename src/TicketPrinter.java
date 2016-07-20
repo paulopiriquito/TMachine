@@ -1,7 +1,7 @@
 /**
  * Created by a3908 on 11/03/2016.
  */
-public class TicketPrinter {
+public class TicketPrinter {//TODO
     /**
      * Inicia a classe, estabelecendo os valores iniciais.
      */
@@ -18,5 +18,9 @@ public class TicketPrinter {
         if (roundTrip)
             toId |= 1;
         SerialEmitter.send(false, toId);
+    }
+
+    public static boolean busy(){
+        return Kit.isBit(Pin.BUSY);
     }
 }

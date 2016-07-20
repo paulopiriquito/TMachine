@@ -15,19 +15,11 @@ public class Station {
         return name;
     }
 
-    public int getCoinsAmout(){
+    public int getPrice(){
         return price;
     }
 
     public int getIndex(){
         return index;
-    }
-
-    public String getSinglePrice(){
-        return String.format("%f", price*0,5);
-    }
-
-    public String getReturnPrice(){
-        return String.format("%f", (price*2)*0,5);
     }
 }

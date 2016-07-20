@@ -47,7 +47,7 @@ K3.t = K2 & K1 & K0 & CE;
 /*Mux*/
 K_press = !((!K0 & !K1 & LN0) # (K0 & !K1 & LN1) # (!K0 & K1 & LN2) # (K0 & K1 & LN3));
 
-/*Control*/
+/*App*/
 [C0,C1].ar = 'b'0;
 [C0,C1].sp = 'b'0;
 [C0,C1].ck = CLKA;

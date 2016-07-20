@@ -5,7 +5,7 @@ import java.util.ArrayList;
  */
 public class Stations {
     public static ArrayList<Station> stations;
-    private static int current;
+    private static int homeIndex;
 
 
     public static void init(int size){
@@ -13,25 +13,23 @@ public class Stations {
     }
 
     public static void add(int index, int price, String name){
-        stations.add(new Station(index, price, name));
+        stations.add(new Station(index+1, price, name));
     }
 
-    public static void addCurrent(int index, int price, String name){
-        current = index;
-        stations.add(new Station(index, price, name));
+    public static void addHome(int index, String name){
+        homeIndex = index;
+        stations.add(new Station(index, 0, name));
     }
 
-    public Station getCurrent(){
-        return stations.get(current);
+    public static Station getHome(){
+        return stations.get(homeIndex);
     }
 
-    public Station getStation(int index){
+    public static Station getStation(int index){
         return stations.get(index);
     }
 
-    public static String stationName(int current){return Stations.stations.get(current).getName();}
-
-    public int getStationNumber(){return Stations.stations.indexOf(current) +1;}
-
-
+    public static boolean isHome(int station){
+        return station == homeIndex;
+    }
 }

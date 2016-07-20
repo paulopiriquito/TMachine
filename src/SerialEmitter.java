@@ -3,7 +3,7 @@
  */
 public class SerialEmitter {
     private static final int FRAMESIZE = 10;
-    private static final boolean LCD = true, TPrinter = false;
+    public static final boolean LCD = true, TPrinter = false;
 
     /**
      * Inicia a classe

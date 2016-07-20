@@ -22,7 +22,7 @@ public class Lcd {
         writeCMD(0b00000001);
         writeCMD(0b00000110);
 
-        //Special Characters
+        /*Special Characters
         writeCMD(0b01000000); // €, on 0x00 address
         writeDATA(0b00000110);
         writeDATA(0b00001001);
@@ -73,7 +73,7 @@ public class Lcd {
         writeDATA(0b00010000);
         writeDATA(0b00001110);
         writeDATA(0b00000000);
-
+        */
 
         writeCMD(0b00001111);
     }
@@ -83,7 +83,6 @@ public class Lcd {
      * @param c Caracter a escrever
      */
     public static void write(char c){
-        System.out.print(c);
         switch (c){
             case '€':
                 writeDATA(0);
@@ -155,8 +154,6 @@ public class Lcd {
      * @param col
      */
     public static void setCursor(int line, int col){
-        if (line > LINES || col > COLS)
-            throw new IndexOutOfBoundsException();
         if (line == 2)
             col += 64;
         writeCMD(128 | (col-1));

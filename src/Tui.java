@@ -3,11 +3,12 @@
  */
 
 public class Tui {
-    //protected static String localStation = Stations.getLocalStation();
-    protected static boolean doubleTicket = false;
+    protected static boolean roundTrip = false;
 
     protected static int readStationNumber(int current, int max, char key) {
         switch (key) {
+            case 'O': return current;
+            case 'K': return current;
             case 'B':
                 if (current == max)
                     current = 1;
@@ -30,16 +31,21 @@ public class Tui {
                 }
                 return current;
         }
-        writeStationNumber(current);
         return current;
     }
 
-    protected boolean readDoubleTicket(char key){
+    protected static void readRoundTrip(char key){
         if(key == 'O') {
-            doubleTicket = !doubleTicket;
-            writeSign(doubleTicket);
+            roundTrip = !roundTrip;
         }
-        return doubleTicket;
+    }
+
+    protected static boolean readAbort(char key){
+        return key == 'A';
+    }
+
+    protected static void hideCursor(){
+        Lcd.setCursor(1,17);
     }
 
     protected static void writeHeader(String header){
@@ -54,7 +60,7 @@ public class Tui {
             Lcd.write(' ');
     }
 
-    protected static void writeFloor(String floor){
+    protected static void writeFloor(String floor){ //TODO review
         Lcd.setCursor(Lcd.LINES,0);
         int position = (Lcd.COLS/2) - (floor.length()/2);
         int i = 1;
@@ -66,9 +72,9 @@ public class Tui {
             Lcd.write(' ');
     }
 
-    protected static void writeSign(boolean returning){
+    protected static void writeSign(boolean roundTrip){
         Lcd.setCursor(Lcd.LINES,1);
-        if (returning)
+        if (roundTrip)
             Lcd.write("<->");
         else
             Lcd.write(" ->");
@@ -80,17 +86,22 @@ public class Tui {
         Lcd.setCursor(Lcd.LINES,(Lcd.COLS/2));
     }
 
-    protected static void writePrice(int eur, int cents){
+    protected static void writePrice(int coins){
+        coins *= 50;
+        int eur = coins / 100;
+        int cents =  coins;
+
         Lcd.setCursor(2,Lcd.COLS-3);
         Lcd.write(String.format("%d$%02d", eur, cents));
         Lcd.setCursor(Lcd.LINES,Lcd.COLS-2);
     }
 
-    protected static void writePayment(int eur, int cents){
+    protected static void writePayment(int coins){
         Lcd.setCursor(Lcd.LINES,1);
         Lcd.write("Pagamento");
-        writePrice(eur, cents);
+        writePrice(coins);
     }
+
 }
 
 

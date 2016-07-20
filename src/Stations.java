@@ -26,10 +26,14 @@ public class Stations {
     }
 
     public static Station getStation(int index){
+        if(index <= 0)
+            return stations.get(0);
+        if(index == homeIndex)
+            return stations.get(index+1);
         return stations.get(index);
     }
 
-    public static boolean isHome(int station){
-        return station == homeIndex;
+    public static boolean isHome(Station station){
+        return station.getIndex() == homeIndex;
     }
 }

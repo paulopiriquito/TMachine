@@ -31,9 +31,15 @@ public class App extends Tui{
         while (lastCtrl != 'S') {
             lastCtrl = welcomeMsg();
             if (manteinance) {
-
+                M.runManteinance();
+                if(M.shutdown){
+                    writeHeader(" ");
+                    writeFloor("A desligar...");
+                    return;
+                }
             }
             ticketSelect(lastCtrl);
+            lastDigit = 0;
         }
     }
 
@@ -41,19 +47,17 @@ public class App extends Tui{
         readRoundTrip(ctrl);
         Station previous = Stations.getHome();
 
-        selected = Stations.getStation(readStationNumber(previous.getIndex(), FileAccess.maxStations, ctrl));
-        if (Stations.isHome(selected.getIndex()))
-            selected = Stations.getStation(selected.getIndex()+1);
+        selected = Stations.getStation(readStationID(ctrl, previous)-1);
         previous = selected;
         showDestination();
-        timeout(5);
+        timeout(30);
         while (System.currentTimeMillis() < endTime){
             lastCtrl = Kbd.getKey();
             if(readAbort(lastCtrl))
                 return;
             if (lastCtrl != Kbd.NONE && lastCtrl != 'K'){
                 readRoundTrip(lastCtrl);
-                selected =  Stations.getStation(readStationNumber(previous.getIndex(), FileAccess.maxStations, ctrl));
+                selected =  Stations.getStation(readStationID(lastCtrl, previous)-1);
                 showDestination();
                 timeout(5);
             }
@@ -91,8 +95,9 @@ public class App extends Tui{
             CoinDeposit.addCoins(CoinAcceptor.acceptorCount);
             CoinAcceptor.collectCoins();
             ++ticketsSold;
-            //TicketPrinter.print(selected.getIndex(),roundTrip);
+            //TicketPrinter.print(selected.getIndex(),roundTrip); //TODO
             writeFloor("Retire o bilhete");
+            Kit.sleep(3000);
         }
     }
 

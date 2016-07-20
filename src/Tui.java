@@ -4,36 +4,53 @@
 
 public class Tui {
     protected static boolean roundTrip = false;
+    protected static int lastDigit = 0;
 
-    protected static int readStationNumber(int current, int max, char key) { //TODO refazer
-        if (current == Stations.getHome().getIndex())
-            current = 0;
+    protected static int getInt(int lastID, int max, char key) {
         switch (key) {
-            case 'O': return current;
-            case 'K': return current;
-            case 'B':
-                if (current == max)
-                    current = 1;
-                else
-                    ++current;
-                break;
             case 'C':
-                if (current == 1)
-                    current = max;
+                if (lastID+1 == max)
+                    lastID = 1;
                 else
-                    --current;
-                break;
+                    ++lastID;
+                return lastID;
+            case 'B':
+                if (lastID-1 == 1)
+                    lastID = max;
+                else
+                    --lastID;
+                return lastID;
             default:
                 if (Character.isDigit(key)) {
-                    current *= 10;
-                    current += Character.getNumericValue(key)-1;
-                    current %= 100;
-                    if (current > max)
-                        current = 1;
+                    int value = Character.getNumericValue(key);
+                    if(lastDigit*10 + value > max || lastDigit == 0) {
+                        lastDigit = value;
+                        return value;
+                    }
+                    lastID = lastDigit*10 + value;
+                    lastDigit = value;
                 }
-                return current;
         }
-        return current;
+        return lastID;
+    }
+
+    protected static int readStationID(char key, Station current){
+        int id = Stations.getHome().getIndex();
+        if(key == 'O' || key == 'K' || key == 'D') {
+            if (Stations.isHome(current)) {
+                return Stations.getStation(current.getIndex() + 1).getIndex();
+            }
+        }
+        else{
+            if(!readAbort(key)){
+                id = getInt(current.getIndex(), FileAccess.maxStations, key);
+            }
+        }
+        if (id <= 1)
+            id = 0;
+        if (id == Stations.getHome().getIndex())
+            id++;
+        return id;
     }
 
     protected static void readRoundTrip(char key){
@@ -62,7 +79,7 @@ public class Tui {
             Lcd.write(' ');
     }
 
-    protected static void writeFloor(String floor){ //TODO review
+    protected static void writeFloor(String floor){
         Lcd.setCursor(Lcd.LINES,0);
         int position = (Lcd.COLS/2) - (floor.length()/2);
         int i = 1;
@@ -70,12 +87,12 @@ public class Tui {
             Lcd.write(' ');
         for (int j = 0; j < floor.length(); ++i, ++j) //Write text
             Lcd.write(floor.charAt(j));
-        for (; i < Lcd.COLS; ++i) //Fill after
+        for (; i < Lcd.COLS+1; ++i) //Fill after
             Lcd.write(' ');
     }
 
     protected static void writeSign(boolean roundTrip){
-        Lcd.setCursor(Lcd.LINES,1);
+        Lcd.setCursor(Lcd.LINES,0);
         if (roundTrip)
             Lcd.write("<->");
         else
@@ -95,9 +112,9 @@ public class Tui {
         if (coins%100 != 0)
             cents = 50;
 
-        Lcd.setCursor(2,Lcd.COLS-3);
+        Lcd.setCursor(2,Lcd.COLS-4);
         Lcd.write(String.format("%d$%02d", eur, cents));
-        Lcd.setCursor(Lcd.LINES,Lcd.COLS-2);
+        Lcd.setCursor(Lcd.LINES,Lcd.COLS-3);
     }
 
     protected static void writePayment(int coins){

@@ -9,8 +9,8 @@ public class Lcd {
     public static final int LINES = 2, COLS = 16; //Dimens?o do display
 
     /**
-     * Envia a sequência de inicio do LCD
-     * Inicia na memória de caracteres as configurações dos caracteres especiais
+     * Envia a sequï¿½ncia de inicio do LCD
+     * Inicia na memï¿½ria de caracteres as configuraï¿½ï¿½es dos caracteres especiais
      */
     public static void init(){
         writeCMD(0b00110000);
@@ -23,7 +23,7 @@ public class Lcd {
         writeCMD(0b00000110);
 
         /*Special Characters
-        writeCMD(0b01000000); // €, on 0x00 address
+        writeCMD(0b01000000); // ï¿½, on 0x00 address
         writeDATA(0b00000110);
         writeDATA(0b00001001);
         writeDATA(0b00011100);
@@ -31,7 +31,7 @@ public class Lcd {
         writeDATA(0b00011100);
         writeDATA(0b00001001);
         writeDATA(0b00000110);
-        writeCMD(0b01000001); // ã, on 0x01 address
+        writeCMD(0b01000001); // ï¿½, on 0x01 address
         writeDATA(0b00001101);
         writeDATA(0b00010010);
         writeDATA(0b00001110);
@@ -39,7 +39,7 @@ public class Lcd {
         writeDATA(0b00001111);
         writeDATA(0b00010001);
         writeDATA(0b00001111);
-        writeCMD(0b01000010); //ç, on 0x02 address
+        writeCMD(0b01000010); //ï¿½, on 0x02 address
         writeDATA(0b00000000);
         writeDATA(0b00001110);
         writeDATA(0b00010000);
@@ -48,7 +48,7 @@ public class Lcd {
         writeDATA(0b00000100);
         writeDATA(0b00001100);
         writeDATA(0b00000000);
-        writeCMD(0b01000011); //â, on 0x03 address
+        writeCMD(0b01000011); //ï¿½, on 0x03 address
         writeDATA(0b00000100);
         writeDATA(0b00001010);
         writeDATA(0b00001110);
@@ -57,7 +57,7 @@ public class Lcd {
         writeDATA(0b00010001);
         writeDATA(0b00001111);
         writeDATA(0b00000000);
-        writeCMD(0b01000100); //é, on 0x04 address
+        writeCMD(0b01000100); //ï¿½, on 0x04 address
         writeDATA(0b00000000);
         writeDATA(0b00000000);
         writeDATA(0b00000000);
@@ -79,33 +79,35 @@ public class Lcd {
     }
 
     /**
-     * Escreve um caracter na posição atual do cursor
+     * Escreve um caracter na posiï¿½ï¿½o atual do cursor
      * @param c Caracter a escrever
      */
     public static void write(char c){
-        switch (c){
-            case '€':
+        /*switch (c){
+            case 'â‚¬':
                 writeDATA(0);
                 break;
-            case 'ã':
+            case 'Ã£':
                 writeDATA(1);
                 break;
-            case 'ç':
+            case 'Ã§':
                 writeDATA(2);
                 break;
-            case 'â':
+            case 'Ã¢':
                 writeDATA(3);
                 break;
-            case 'é':
+            case 'Ã©':
                 writeDATA(4);
                 break;
             default: writeDATA(c);
-        }
+        }*/
+
+        writeDATA(c);
 
     }
 
     /**
-     * Escreve uma string na posiçao atual do cursor
+     * Escreve uma string na posiï¿½ao atual do cursor
      */
     public static void write(String txt){
         for (int i = 0; i < txt.length(); i++) {
@@ -135,39 +137,39 @@ public class Lcd {
 
     /**
      * Envia dados de escrita no LCD
-     * @param data código do caracter ASCII
+     * @param data cï¿½digo do caracter ASCII
      */
     private static void writeDATA(int data){
         writeByte(true, data);
     }
 
     /**
-     * Retorna o cursor ao endereço 0
+     * Retorna o cursor ao endereï¿½o 0
      */
     public static void returnHome(){
         writeCMD(0b00000010);
     }
 
     /**
-     * Define o endereço do cursor com a posição desejada
+     * Define o endereï¿½o do cursor com a posiï¿½ï¿½o desejada
      * @param line
      * @param col
      */
     public static void setCursor(int line, int col){
         if (line == 2)
             col += 64;
-        writeCMD(128 | (col-1));
+        writeCMD(128 | (col));
     }
 
 
     /**
-     * Método de teste do funcionamento do lcd
+     * Mï¿½todo de teste do funcionamento do lcd
      * @param args
      */
     public static void main(String[] args) {
         init();
         returnHome();
-        write("Testing ãç€éâ");
+        write("Testing ï¿½ï¿½ï¿½ï¿½");
     }
 
 }

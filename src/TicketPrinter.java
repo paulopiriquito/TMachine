@@ -1,7 +1,7 @@
 /**
  * Created by a3908 on 11/03/2016.
  */
-public class TicketPrinter {//TODO
+public class TicketPrinter {//TODO nao dá sinal enquanto nao for recolhido o bilhete
     /**
      * Inicia a classe, estabelecendo os valores iniciais.
      */

@@ -5,7 +5,9 @@
 public class Tui {
     protected static boolean roundTrip = false;
 
-    protected static int readStationNumber(int current, int max, char key) {
+    protected static int readStationNumber(int current, int max, char key) { //TODO refazer
+        if (current == Stations.getHome().getIndex())
+            current = 0;
         switch (key) {
             case 'O': return current;
             case 'K': return current;
@@ -24,7 +26,7 @@ public class Tui {
             default:
                 if (Character.isDigit(key)) {
                     current *= 10;
-                    current += Character.getNumericValue(key);
+                    current += Character.getNumericValue(key)-1;
                     current %= 100;
                     if (current > max)
                         current = 1;
@@ -89,7 +91,9 @@ public class Tui {
     protected static void writePrice(int coins){
         coins *= 50;
         int eur = coins / 100;
-        int cents =  coins;
+        int cents = 0;
+        if (coins%100 != 0)
+            cents = 50;
 
         Lcd.setCursor(2,Lcd.COLS-3);
         Lcd.write(String.format("%d$%02d", eur, cents));

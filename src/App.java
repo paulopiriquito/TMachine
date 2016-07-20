@@ -93,7 +93,6 @@ public class App extends Tui{
             ++ticketsSold;
             //TicketPrinter.print(selected.getIndex(),roundTrip);
             writeFloor("Retire o bilhete");
-           // while (TicketPrinter.busy());
         }
     }
 

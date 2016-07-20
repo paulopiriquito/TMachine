@@ -19,8 +19,4 @@ public class TicketPrinter {//TODO
             toId |= 1;
         SerialEmitter.send(false, toId);
     }
-
-    public static boolean busy(){
-        return Kit.isBit(Pin.BUSY);
-    }
 }

@@ -1,56 +1,57 @@
 /**
- * Created by a3908 on 11/03/2016.
+ * Created by a39081 on 11/03/2016.
  */
 
 public class Tui {
     protected static boolean roundTrip = false;
     protected static int lastDigit = 0;
+    protected static double timeout;
 
-    protected static int getInt(int lastID, int max, char key) {
-        switch (key) {
-            case 'C':
-                if (lastID+1 == max)
-                    lastID = 1;
-                else
-                    ++lastID;
-                return lastID;
-            case 'B':
-                if (lastID-1 == 1)
-                    lastID = max;
-                else
-                    --lastID;
-                return lastID;
-            default:
-                if (Character.isDigit(key)) {
-                    int value = Character.getNumericValue(key);
-                    if(lastDigit*10 + value > max || lastDigit == 0) {
-                        lastDigit = value;
-                        return value;
-                    }
-                    lastID = lastDigit*10 + value;
-                    lastDigit = value;
-                }
+    protected static int getInt(char key, int max) {
+        int id = 0;
+        if (Character.isDigit(key)) {
+            int value = Character.getNumericValue(key);
+            if(value == 0 && lastDigit ==0){
+                lastDigit = value;
+                return 1;
+            }
+            if(lastDigit*10 + value >= max || lastDigit == 0) {
+                lastDigit = value;
+                return value;
+            }
+            else {
+                id = lastDigit*10 + value;
+                lastDigit = value;
+            }
         }
-        return lastID;
+        return id;
     }
 
-    protected static int readStationID(char key, Station current){
-        int id = Stations.getHome().getIndex();
-        if(key == 'O' || key == 'K' || key == 'D') {
-            if (Stations.isHome(current)) {
-                return Stations.getStation(current.getIndex() + 1).getIndex();
-            }
+    protected static Station readStation(char key, Station selected, int maxStation){
+        switch (key){
+            case 'O': lastDigit = 0; break;
+            case 'C': lastDigit = 0; selected = getUpStation(selected, maxStation); break;
+            case 'B': lastDigit = 0; selected = getDownStation(selected, maxStation); break;
+            default:
+                selected = Stations.getStationById(getInt(key, maxStation));break;
         }
-        else{
-            if(!readAbort(key)){
-                id = getInt(current.getIndex(), FileAccess.maxStations, key);
-            }
+        return selected;
+    }
+
+    private static Station getUpStation(Station selected, int maxStation){
+        if (selected.getIndex()+1 < maxStation)
+            return Stations.getStation(selected.getIndex()+1);
+        else {
+            return Stations.getStation(0);
         }
-        if (id <= 1)
-            id = 0;
-        if (id == Stations.getHome().getIndex())
-            id++;
-        return id;
+    }
+
+    private static Station getDownStation(Station selected, int maxStation){
+        if (selected.getIndex()-1 < 0)
+            return Stations.getStation(maxStation-1);
+        else {
+            return Stations.getStation(selected.getIndex()-1);
+        }
     }
 
     protected static void readRoundTrip(char key){
@@ -118,9 +119,32 @@ public class Tui {
     }
 
     protected static void writePayment(int coins){
-        Lcd.setCursor(Lcd.LINES,1);
+        Lcd.setCursor(Lcd.LINES,0);
         Lcd.write("Pagamento");
         writePrice(coins);
+    }
+
+    protected static void writeCounter(String name, int value){
+        writeHeader("Contadores");
+        writeFloor(" ");
+        Lcd.setCursor(Lcd.LINES,0);
+        Lcd.write(name + "=" + value);
+        hideCursor();
+    }
+
+    protected static void showDestination(Station selected){
+        writeHeader(selected.getName());
+        writeFloor(" ");
+        writeSign(roundTrip);
+        int price = selected.getPrice();
+        if (roundTrip)
+            price *=2;
+        writePrice(price);
+        writeStationNumber(selected.getIndex()+1);
+    }
+
+    protected static void timeout(int seconds){
+        timeout = System.currentTimeMillis() + (seconds*1000);
     }
 
 }

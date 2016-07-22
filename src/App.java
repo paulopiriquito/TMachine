@@ -1,22 +1,17 @@
-import java.io.FileWriter;
-
 /**
- * Created by a3908 on 11/03/2016.
+ * Created by a39081 on 11/03/2016.
  */
 public class App extends Tui{
-
-
-    private static int ticketsSold = 0;
-
-    private static double endTime;
+    private static int ticketsSold = 0, maxStations;
     private static boolean manteinance = false;
     private static char lastCtrl = Kbd.NONE;
-    private static Station selected;
+    private static Station selectedStation;
 
     public static void main(String[] args) {
         CoinDeposit.addCoins(FileAccess.loadCoins(FileAccess.REGISTER));
         ticketsSold = FileAccess.loadTickets(FileAccess.REGISTER);
         FileAccess.loadStations(FileAccess.STATIONS);
+        maxStations = FileAccess.maxStations;
 
         Kit.init();
         SerialEmitter.init();
@@ -25,57 +20,66 @@ public class App extends Tui{
         CoinAcceptor.init();
 
         run();
+        writeHeader(" ");
+        writeFloor("A desligar...");
+        shutdown();
     }
 
     private static void run(){
-        while (lastCtrl != 'S') {
+        while (!M.shutdown) {
             lastCtrl = welcomeMsg();
-            if (manteinance) {
-                M.runManteinance();
-                if(M.shutdown){
-                    writeHeader(" ");
-                    writeFloor("A desligar...");
-                    return;
-                }
-            }
-            ticketSelect(lastCtrl);
             lastDigit = 0;
+            if (manteinance)
+                manteinance = M.runManteinance();
+            else {
+                roundTrip = false;
+                ticketSelect(lastCtrl);
+            }
         }
     }
 
     private static void ticketSelect(char ctrl){
         readRoundTrip(ctrl);
-        Station previous = Stations.getHome();
-
-        selected = Stations.getStation(readStationID(ctrl, previous)-1);
-        previous = selected;
-        showDestination();
-        timeout(30);
-        while (System.currentTimeMillis() < endTime){
+        selectedStation = readStation(ctrl, Stations.getStation(Stations.getHome().getIndex()), maxStations);
+        if (Stations.isHome(selectedStation))
+            return;
+        showDestination(selectedStation);
+        timeout(5);
+        while (System.currentTimeMillis() < timeout){
             lastCtrl = Kbd.getKey();
-            if(readAbort(lastCtrl))
-                return;
-            if (lastCtrl != Kbd.NONE && lastCtrl != 'K'){
-                readRoundTrip(lastCtrl);
-                selected =  Stations.getStation(readStationID(lastCtrl, previous)-1);
-                showDestination();
-                timeout(5);
-            }
-            if (lastCtrl == 'K') {
-                emitTicket();
-                return;
+            if (lastCtrl != Kbd.NONE ) {
+                if(readAbort(lastCtrl))
+                    return;
+                if (lastCtrl != 'K') {
+                    readRoundTrip(lastCtrl);
+                    selectedStation = readStation(lastCtrl, selectedStation, maxStations);
+                    if (Stations.isHome(selectedStation)) {
+                        writeHeader(Stations.getHome().getName());
+                        writeFloor("bem vindo");
+                        hideCursor();
+                    }
+                    else
+                        showDestination(selectedStation);
+                    timeout(5);
+                }
+                else {
+                    if (!Stations.isHome(selectedStation)) {
+                        emitTicket();
+                        return;
+                    }
+                }
             }
         }
     }
 
     private static void emitTicket(){
-        boolean timeout = false, aborted = false;
-        int price = selected.getPrice();
+        boolean onTimeout = false, aborted = false;
+        int price = selectedStation.getPrice();
         if (roundTrip)
             price *= 2;
-        timeout(15);
         writePayment(price - CoinAcceptor.acceptorCount);
-        while (CoinAcceptor.acceptorCount < price && !aborted && !timeout){
+        timeout(15);
+        while (CoinAcceptor.acceptorCount < price && !aborted && !onTimeout){
             if (CoinAcceptor.hasCoin() != 0){
                 CoinAcceptor.acceptCoin();
                 writePayment(price - CoinAcceptor.acceptorCount);
@@ -83,27 +87,28 @@ public class App extends Tui{
             }
             lastCtrl = Kbd.getKey();
             aborted = readAbort(lastCtrl);
-            if (System.currentTimeMillis() > endTime)
-                timeout = true;
+            if (System.currentTimeMillis() > timeout)
+                onTimeout = true;
         }
-        if (aborted || timeout) {
-            CoinAcceptor.ejectCoins();
+        if (aborted || onTimeout) {
             writeFloor("Compra anulada");
+            CoinAcceptor.ejectCoins();
             Kit.sleep(3000);
         }
         else {
             CoinDeposit.addCoins(CoinAcceptor.acceptorCount);
             CoinAcceptor.collectCoins();
             ++ticketsSold;
-            //TicketPrinter.print(selected.getIndex(),roundTrip); //TODO
             writeFloor("Retire o bilhete");
-            Kit.sleep(3000);
+            TicketPrinter.print(selectedStation.getIndex()+1,roundTrip);
+            while (SerialEmitter.isBusy())
+                ;
+            writeHeader(" ");
+            writeFloor("Obrigado");
+            Kit.sleep(2000);
         }
     }
 
-    private static void timeout(int seconds){
-        endTime = System.currentTimeMillis() + (seconds*1000);
-    }
 
     private static char welcomeMsg(){
         char ctrl = Kbd.NONE;
@@ -111,7 +116,7 @@ public class App extends Tui{
         writeFloor("bem vindo");
         hideCursor();
         while (ctrl == Kbd.NONE || readAbort(ctrl)){
-            if (M.readManteinance()) {
+            if (M.onManteinance()) {
                 manteinance = true;
                 return ctrl;
             }
@@ -120,11 +125,18 @@ public class App extends Tui{
         return ctrl;
     }
 
-    private static void showDestination(){
-        writeHeader(selected.getName());
-        writeFloor(" ");
-        writeSign(roundTrip);
-        writePrice(selected.getPrice());
-        writeStationNumber(selected.getIndex());
+    public static void resetCounters(){
+        ticketsSold = 0;
+        CoinDeposit.reset();
+    }
+
+    public static int getTicketsCounter(){
+        return ticketsSold;
+    }
+
+    private static void shutdown(){
+        FileAccess.saveReg(FileAccess.REGISTER,ticketsSold,CoinDeposit.getValue());
+        Kit.sleep(3000);
+        System.exit(0);
     }
 }

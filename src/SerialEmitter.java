@@ -15,7 +15,7 @@ public class SerialEmitter {
     }
 
     /**
-     *
+     * Envia uma frame com determinado size para o serial receiver
      * @param frame
      * @param size
      */

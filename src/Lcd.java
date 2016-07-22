@@ -161,11 +161,6 @@ public class Lcd {
         writeCMD(128 | (col));
     }
 
-
-    /**
-     * M�todo de teste do funcionamento do lcd
-     * @param args
-     */
     public static void main(String[] args) {
         init();
         returnHome();

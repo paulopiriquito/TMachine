@@ -13,7 +13,7 @@ public class Stations {
     }
 
     public static void add(int index, int price, String name){
-        stations.add(new Station(index+1, price, name));
+        stations.add(new Station(index, price, name));
     }
 
     public static void addHome(int index, String name){
@@ -26,11 +26,13 @@ public class Stations {
     }
 
     public static Station getStation(int index){
-        if(index <= 0)
-            return stations.get(0);
-        if(index == homeIndex)
-            return stations.get(index+1);
         return stations.get(index);
+    }
+
+    public static Station getStationById(int id){
+        if (id-1 < 0 || id-1 >= stations.size())
+            return getStation(0);
+        return getStation(id -1);
     }
 
     public static boolean isHome(Station station){

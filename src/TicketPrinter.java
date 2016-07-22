@@ -1,7 +1,8 @@
 /**
  * Created by a3908 on 11/03/2016.
  */
-public class TicketPrinter {//TODO nao dá sinal enquanto nao for recolhido o bilhete
+public class TicketPrinter {
+
     /**
      * Inicia a classe, estabelecendo os valores iniciais.
      */
@@ -17,6 +18,10 @@ public class TicketPrinter {//TODO nao dá sinal enquanto nao for recolhido o bi
         toId <<= 1;
         if (roundTrip)
             toId |= 1;
-        SerialEmitter.send(false, toId);
+        /*
+        SerialEmitter.send(false, toId); // FIXME: 22/07/2016 testar com hardware
+        while (SerialEmitter.isBusy())
+            ;
+        */
     }
 }

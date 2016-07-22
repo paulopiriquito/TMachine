@@ -2,7 +2,7 @@ import java.io.*;
 import java.util.Scanner;
 
 /**
- * Created by Jo�opaulodacostaFran on 16/05/2016.
+ * Created by a39081 on 16/05/2016.
  */
 public class FileAccess {
     public static final String REGISTER = "resources/register.txt";
@@ -39,9 +39,10 @@ public class FileAccess {
     public static int loadCoins(String filename){
         try {
             BufferedReader br = new BufferedReader(new FileReader(filename));
-            return Integer.valueOf(br.readLine().split(";")[0]);
+            return Integer.valueOf(br.readLine().split("[;]")[1]);
         }
         catch(Exception e){
+            System.out.println("Loading empty coin register");
             return 0;
         }
     }
@@ -49,9 +50,10 @@ public class FileAccess {
     public static int loadTickets(String filename){
         try {
             BufferedReader br = new BufferedReader(new FileReader(filename));
-            return Integer.valueOf(br.readLine().split(";")[1]);
+            return Integer.valueOf(br.readLine().split("[;]")[0]);
         }
         catch(Exception e){
+            System.out.println("Loading empty ticket register");
             return 0;
         }
     }
@@ -60,17 +62,10 @@ public class FileAccess {
         try{
             FileWriter fw = new FileWriter(filename, false);
             fw.write(ticketCount + ";" + coinDeposit);
+            fw.close();
         }
         catch (IOException e){
             System.out.println("Error saving register");
         }
-    }
-
-
-
-    public static void main(String[] args) {
-        loadStations("resources/stations.txt");
-        for (Station e : Stations.stations)
-            System.out.println(e.getPrice() + " " + e.getName());
     }
 }

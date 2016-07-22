@@ -9,7 +9,6 @@ public class CoinAcceptor {
         Kit.clrBits(Pin.ACCEPT);
         Kit.clrBits(Pin.RETURN);
         Kit.clrBits(Pin.COLLECT);
-        CoinDeposit.reset();
     }
     //Retorna !=0 se foi introduzida uma nova moeda, restantes valores identificam o tipo
     public static int hasCoin(){
@@ -19,6 +18,7 @@ public class CoinAcceptor {
     }
     //Informa o moedeiro que a moeda foi contabilizada.
     public static void acceptCoin(){
+        Kit.sleep(1000);
         Kit.setBits(Pin.ACCEPT);
         Kit.sleep(1000);
         Kit.clrBits(Pin.ACCEPT);

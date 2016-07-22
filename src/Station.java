@@ -22,4 +22,8 @@ public class Station {
     public int getIndex(){
         return index;
     }
+
+    public boolean equals(Station obj) {
+        return this.index == obj.getIndex();
+    }
 }

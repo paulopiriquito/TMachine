@@ -15,7 +15,7 @@ public class Tui {
                 lastDigit = value;
                 return 1;
             }
-            if(lastDigit*10 + value >= max || lastDigit == 0) {
+            if(lastDigit*10 + value > max || lastDigit == 0) {
                 lastDigit = value;
                 return value;
             }

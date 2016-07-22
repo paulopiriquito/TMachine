@@ -69,7 +69,7 @@ public class Lcd {
     }
 
     /**
-     * Escreve um caracter na posi��o atual do cursor
+     * Escreve um caracter na posição actual do cursor
      * @param c Caracter a escrever
      */
     public static void write(char c){
@@ -97,7 +97,7 @@ public class Lcd {
     }
 
     /**
-     * Escreve uma string na posi�ao atual do cursor
+     * Escreve uma string na posição actual do cursor
      */
     public static void write(String txt){
         for (int i = 0; i < txt.length(); i++) {
@@ -108,7 +108,7 @@ public class Lcd {
     /**
      * Escreve um comando/dados no LCD
      * @param rs bit de controlo true:dados false:comando
-     * @param data informa??o de dados/comando
+     * @param data informação de dados/comando
      */
     private static void writeByte(boolean rs, int data){
         data <<= 1;
@@ -127,14 +127,14 @@ public class Lcd {
 
     /**
      * Envia dados de escrita no LCD
-     * @param data c�digo do caracter ASCII
+     * @param data codigo do caracter ASCII
      */
     private static void writeDATA(int data){
         writeByte(true, data);
     }
 
     /**
-     * Retorna o cursor ao endere�o 0
+     * Retorna o cursor ao endereço 0
      */
     public static void returnHome(){
         writeCMD(0b00000010);

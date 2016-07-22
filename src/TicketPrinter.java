@@ -1,6 +1,3 @@
-/**
- * Created by a3908 on 11/03/2016.
- */
 public class TicketPrinter {
 
     /**
@@ -12,16 +9,14 @@ public class TicketPrinter {
 
     /**
      * Envia comando para imprimir e dispensar um bilhete para a estação toId, roundTrip a true se
-     * o bilhete for de ida/volta
+     * o bilhete for de ida/volta, espera que o bilhete seja retirado da impressora antes de avançar
      */
     public static void print(int toId, boolean roundTrip){
         toId <<= 1;
         if (roundTrip)
             toId |= 1;
-        /*
-        SerialEmitter.send(false, toId); // FIXME: 22/07/2016 testar com hardware
+        SerialEmitter.send(false, toId);
         while (SerialEmitter.isBusy())
             ;
-        */
     }
 }

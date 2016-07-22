@@ -1,5 +1,5 @@
 /**
- * Created by a3908 on 11/03/2016.
+ * Guarda e actualiza a contagem de moedas no cofre
  */
 public class CoinDeposit {
     private static int coinCounter = 0;

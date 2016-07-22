@@ -1,5 +1,5 @@
 /**
- * Created by JoaopaulodacostaFran on 23/05/2016.
+ * Representação de uma estação
  */
 public class Station {
     private int index, price;

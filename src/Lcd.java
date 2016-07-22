@@ -1,16 +1,12 @@
 /**
- * Created by a3908 on 11/03/2016.
- */
-
-/**
  * Escreve no LCD usando a interface de 8 bits
  */
 public class Lcd {
-    public static final int LINES = 2, COLS = 16; //Dimens?o do display
+    public static final int LINES = 2, COLS = 16; //Dimensão do display
 
     /**
-     * Envia a sequ�ncia de inicio do LCD
-     * Inicia na mem�ria de caracteres as configura��es dos caracteres especiais
+     * Envia a sequência de inicio do LCD
+     * Inicia na memória gráfica as configurações dos caracteres especiais
      */
     public static void init(){
         writeCMD(0b00110000);
@@ -22,8 +18,8 @@ public class Lcd {
         writeCMD(0b00000001);
         writeCMD(0b00000110);
 
-        /*Special Characters
-        writeCMD(0b01000000); // �, on 0x00 address
+        /*Escrita das configurações para caracteres especiais na GRAM do lcd
+        writeCMD(0b01000000); //€, on 0x00 address
         writeDATA(0b00000110);
         writeDATA(0b00001001);
         writeDATA(0b00011100);
@@ -31,7 +27,7 @@ public class Lcd {
         writeDATA(0b00011100);
         writeDATA(0b00001001);
         writeDATA(0b00000110);
-        writeCMD(0b01000001); // �, on 0x01 address
+        writeCMD(0b01000001); //ã, on 0x01 address
         writeDATA(0b00001101);
         writeDATA(0b00010010);
         writeDATA(0b00001110);
@@ -39,7 +35,7 @@ public class Lcd {
         writeDATA(0b00001111);
         writeDATA(0b00010001);
         writeDATA(0b00001111);
-        writeCMD(0b01000010); //�, on 0x02 address
+        writeCMD(0b01000010); //ç, on 0x02 address
         writeDATA(0b00000000);
         writeDATA(0b00001110);
         writeDATA(0b00010000);
@@ -48,7 +44,7 @@ public class Lcd {
         writeDATA(0b00000100);
         writeDATA(0b00001100);
         writeDATA(0b00000000);
-        writeCMD(0b01000011); //�, on 0x03 address
+        writeCMD(0b01000011); //â, on 0x03 address
         writeDATA(0b00000100);
         writeDATA(0b00001010);
         writeDATA(0b00001110);
@@ -57,13 +53,7 @@ public class Lcd {
         writeDATA(0b00010001);
         writeDATA(0b00001111);
         writeDATA(0b00000000);
-        writeCMD(0b01000100); //�, on 0x04 address
-        writeDATA(0b00000000);
-        writeDATA(0b00000000);
-        writeDATA(0b00000000);
-        writeDATA(0b00000000);
-        writeDATA(0b00000000);
-        writeDATA(0b00000000);
+        writeCMD(0b01000100); //é, on 0x04 address
         writeDATA(0b00000001);
         writeDATA(0b00000010);
         writeDATA(0b00000100);
@@ -151,7 +141,7 @@ public class Lcd {
     }
 
     /**
-     * Define o endere�o do cursor com a posi��o desejada
+     * Define o endereço do cursor com a posição desejada
      * @param line
      * @param col
      */
@@ -160,11 +150,4 @@ public class Lcd {
             col += 64;
         writeCMD(128 | (col));
     }
-
-    public static void main(String[] args) {
-        init();
-        returnHome();
-        write("Testing ����");
-    }
-
 }

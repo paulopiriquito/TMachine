@@ -32,7 +32,6 @@ public class SerialEmitter {
 
         Kit.setBits(Pin.SCLK);
 
-
         for (int i = 1; i < size; i++) {
             if(frame%2 == 1) //Set do próximo bit
                 Kit.setBits(Pin.SDX);
@@ -45,7 +44,6 @@ public class SerialEmitter {
         Kit.clrBits((Pin.SCLK));
         Kit.setBits(Pin.IOSsel); //Desliga a recepção do IOS
     }
-
     /**
      * Envia uma trama com bit 'addr' e os bits de 'data'
      * @param addr Endereço true:LCD false:Ticket Printer
@@ -60,7 +58,6 @@ public class SerialEmitter {
             data |= 1;
         send(data, FRAMESIZE);
     }
-
     /**
      * Verifica se o IOS está ocupado
      * @return True se ocupado
@@ -68,10 +65,4 @@ public class SerialEmitter {
     public static boolean isBusy(){
         return Kit.isBit(Pin.BUSY);
     }
-
-    public static void main (String[] args){
-        init();
-        send(LCD, 0b101010101);
-    }
-
 }

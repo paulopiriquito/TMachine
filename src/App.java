@@ -1,3 +1,7 @@
+//TODO Tirar modo de simulação
+//TODO Recompilar todos os plds
+//TODO Regravar todas as pals
+
 /**
  * Aplicação principal
  * Extende a classe Tui para interface hardware-aplicação

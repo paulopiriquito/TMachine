@@ -17,7 +17,6 @@ Pin 5 = Fsh;    //From TicketPrinter
 
 /* Output*/
 Pin 14 = wr;    //To BitMemory
-/*Pin 15 = DXval; //To Dispatcher*/
 Pin 16 = busy;  //To UsbPort
 Pin [18..21] = [Address0..3]; //To BitMemory
 Pin 22 = WrL;

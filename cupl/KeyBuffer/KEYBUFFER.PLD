@@ -9,14 +9,22 @@ Location  ;
 Device   v750c ;
 
 PIN 1 = CLK;
-PIN  2 = DAV;
+PIN 2 = DAV;
 PIN 3 = ACK;
+PIN 4 = accept;
+PIN 5 = collect;
+PIN 6 = eject;
+PIN 7 = pres;
+PIN 8 = 1HZ;
 
 PIN 14 = DAC;
 PIN 15 = Dval;
 PIN 16 = Wreg;
+PIN 17 = coin;
+PIN 18 = empty;
 
 PINNODE[25,26] = [C0,C1];
+PINNODE[27,28,29] = [A0,A1,A2];
 
 /*Buffer control*/
 [C0..1].ar = 'b'0;
@@ -39,4 +47,32 @@ present 3:
 	out Dval;
 	if ACK next 0;
 	default next 3;
+}
+
+/*Coin Acceptor*/
+[A0..1].ar = 'b'0;
+[A0..1].sp = 'b'0;
+[A0..1].ck = CLK;
+A2.ar = reset;
+A2.sp = 'b'0;
+A2.ck = 1HZ;
+
+Sequence[A1,A0]{
+
+present 0:
+    out empty;
+    if pres & !eject & !collect next 1;
+    default next 0;
+present 1:
+    out coin, reset;
+    if accept next 2
+    if eject # collect next 3
+    default next 1;
+present 2:
+    if !pres next 0;
+    default next 2;
+present 3:
+    out coin;
+    if A2 & (eject # collect) next 2;
+    default next 3;
 }

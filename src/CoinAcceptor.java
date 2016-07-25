@@ -23,9 +23,7 @@ public class CoinAcceptor {
      * Informa o moedeiro que a moeda foi contabilizada
      */
     public static void acceptCoin(){
-        Kit.sleep(1000);
         Kit.setBits(Pin.ACCEPT);
-        Kit.sleep(1000);
         Kit.clrBits(Pin.ACCEPT);
         ++acceptorCount;
     }
@@ -35,7 +33,7 @@ public class CoinAcceptor {
      */
     public static void ejectCoins(){
         Kit.setBits(Pin.RETURN);
-        Kit.sleep(1000);
+        Kit.sleep(1200);
         Kit.clrBits(Pin.RETURN);
         acceptorCount = 0;
     }
@@ -45,7 +43,7 @@ public class CoinAcceptor {
      */
     public static void collectCoins(){
         Kit.setBits(Pin.COLLECT);
-        Kit.sleep(1000);
+        Kit.sleep(1200);
         Kit.clrBits(Pin.COLLECT);
         acceptorCount = 0;
     }

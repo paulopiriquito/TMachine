@@ -1,0 +1,58 @@
+
+## --- Modules ---
+
+## Additional packages with Hardware to Simulator
+package isel.leic.simul.ticket    # for Modules used in TicketMachine
+
+# Generic modules to activate from Simulator
+kit = UsbPort ; "Usbport"
+kbd = Keyboard("0123456789.^AODv",4,4) ; 1?oe
+lcd = LCD ; "Display"
+m   = Switch ; "Support Interface" ; setLabel("Manut")
+
+# Custom modules from isel.leic.simul.ticket
+kb  = KeyBuffer ; "Key Buffer"
+sr = SerialReceiver ; "Serial Receiver"
+dsp = Dispatcher ; "Dispatcher"
+ca = CoinAcceptor ; "Acceptor"
+tp = TicketPrinter ; "Printer"
+
+## --- Links ---
+
+# Key buffer and Key Decode
+kb.DAC -> kbd.ack
+kbd.val -> kb.DAV
+kbd.K[0:3] -> kb.D[0:3]
+kb.Dval -> kit.I4
+kit.O0 -> kb.ACK
+kb.K[0:3] -> kit.I[0:3]
+
+# Serial Receiver
+sr.busy -> kit.I5
+kit.O1 -> sr.SCLK
+kit.O2 -> sr.SDX
+kit.O3 -> sr.~SS
+
+# Dispatcher
+sr.DXval -> dsp.Dval
+sr.D[0:9] -> dsp.I[0:9]
+dsp.done -> sr.accept
+
+# LCD
+dsp.WrL -> lcd.e
+dsp.D0 -> lcd.rs
+dsp.D[1:8] -> lcd.D[0:7]
+
+# Printer
+tp.Fn -> dsp.Fsh
+dsp.WrT -> tp.print
+dsp.D[0:4] -> tp.TId[0:4]
+
+# Coin Acceptor
+kit.O4 -> ca.accept
+kit.O5 -> ca.eject
+kit.O6 -> ca.collect
+ca.Coin -> kit.I6
+
+# Manut switch
+m.out -> kit.I7
